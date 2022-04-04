@@ -2,8 +2,8 @@
   "workbench.colorCustomizations": {
     "tab.activeBorderTop": "#F9FAF2",
     "tab.activeBorder": "#F9FAF2",
-    "activityBar.background": "#263207",
-    "titleBar.activeBackground": "#354509",
+    "activityBar.background": "#b33434",
+    "titleBar.activeBackground": "#b33434",
     "titleBar.activeForeground": "#F6FCE8"
   },
   "editor.formatOnSave": true
