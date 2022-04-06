@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="./main.css" />
         <link rel="stylesheet" href="./collapse.css" />
         <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
         <link rel="stylesheet" href="vendors/highlight.min.css" />
     </head>
     <body>
@@ -170,20 +171,33 @@
                 <div>
                     <h2>Python list</h2>
                     <p>
-                        A tree is represented by a list of tuples: 1) the value of the node is called the label, key or
-                        content; 2) the list of children.
+                        A tree can be represented by a list of tuples. Each tuple represents a particular node of the
+                        tree. The tuple's first element represents the label and the tuple's second element represents
+                        the pointers (indexes) to the left and right nodes.
                     </p>
                     <pre>
-Tree = [ 
+<code class="python">
+tree = [ 
     (label_1, [left_index_1, right_index_1]),
     ...
     (label_n, [left_index_n, right_index_n])
 ]
+</code>
                     </pre>
                     <p>
-                        We could have used a list of lists instead of a list of tuples. Other models mix the labels and
-                        the indices of the wires in the same sublist. The possibilities of representation are endless!
+                        A tree can be represented by a list of lists. The possibilities of tree representation are
+                        endless.
                     </p>
+                    <pre>
+                        <code class="python">
+tree = [ 
+    [label_1, left_index_1, right_index_1],
+    ...
+    [label_n, left_index_n, right_index_n]
+]
+                            
+                        </code>
+                    </pre>
 
                     <p>Consider the following binary tree. Here is the implementation of the tree in Python.</p>
                     <img src="./images/bst-python-example.png" alt="" />
@@ -204,18 +218,16 @@ print(tree[2][1])    # To get the list of children of the third node (indexed to
 print(tree[4][0])    #  To get the key of the fifth node (indexed to 4)
 # -> 14
 
-
 ### 
-def isEmpty(tree):
+def is_empty(tree):
     return len(tree) == 0  
     
 ###
-def get_label(node)
+def get_label(node):
     return node[0]
 
 print(get_label(tree[1])) # -> 11
 
-### Get the list of children of a node
 def get_children(node):
     return node[1]
 
