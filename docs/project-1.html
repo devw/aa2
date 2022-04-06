@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project 1</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="introduction">
+            <details>
+                <summary>Putting words into a binary search tree</summary>
+                <h2>Introduction</h2>
+                <p>
+                    You are a team of young engineers responsible for maintaining and enriching a database of words in
+                    different languages. This database will then be used during the machine learning analysis.
+                </p>
+                <p>
+                    The first corpus of words is provided to you (words.txt). It contains just over 20,000 proper nouns
+                    and common nouns of the English language. Your first task will be to implement in Python a
+                    particular data structure allowing you to classify these words in alphabetical order and to ensure a
+                    fast search for a word in the corpus (O(log(n))). Your project manager gives you one week to
+                    complete this task.
+                </p>
+                <p>
+                    In one week, a new corpus of words will be provided to you (words-big.txt). You will need to
+                    implement an insertion function in the existing tree. The insertion of a new element should have a
+                    time complexity equal to O(log(n)). However, this requires your data structure to be balanced
+                    (perfect binary tree).
+                </p>
+            </details>
+        </article>
+        <article id="terminology">
+            <details>
+                <summary>Resources for dealing with the problem</summary>
+                <div>
+                    <h2>References</h2>
+                    <ul>
+                        <li>Binary Trees Terminology</li>
+                        <li>Binary Trees Path</li>
+                        <li>Binary Search Trees Terminology</li>
+                        <li>Binary Search Tree Operations</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>Objectifs</h2>
+                    <ul>
+                        <li>Implementation of a BST</li>
+                        <li>Understand and implement the algorithm for inserting an element into a BST</li>
+                        <li>Know the complexity of the BST algorithms</li>
+                    </ul>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Code Hints</summary>
+                <h2>Functions' name</h2>
+                <pre>
+
+                
+                <code class="python">
+
+def main():
+    fName = '/tmp/words.txt' 
+    raw_data = get_data(fName)
+    words = get_words(raw_data)
+    tree = get_tree(words)
+    print(tree)
+
+main()
+                </code>
+            </pre>
+                <h2>get_data function</h2>
+                <pre>
+                <code class="python">
+# first solution
+def get_data(fName):
+    f = open(fName,"r", encoding='utf-8')
+    return f.readlines()
+
+# second solution
+def get_data(url):
+    from urllib.request import urlopen
+    response = urlopen(url)
+    return response.read().decode('utf-8').split("\n")
+         
+                </code>
+            </pre>
+
+                <h2>get_words function</h2>
+                <pre><code class="python">
+def get_words(data):
+    words = []
+    for word in data:
+        words.append(word.rstrip("\n"))
+    return words
+</code></pre>
+                <h2>get_tree function</h2>
+                <pre class="blur"><code class="python">
+def get_tree(words):
+    tree=[]
+    tree.append([words.pop(0), None, None])
+        
+    for word in words:
+        node_index = 0
+        side = None
+        while node_index != None:
+            last_node_index = node_index
+            if word > get_label(tree[node_index]): 
+                node_index = tree[node_index][2] 
+                side = "right"
+            else:
+                node_index = tree[node_index][1]
+                side = "left"
+
+        if side == "right":
+            tree[last_node_index][2] = len(tree)
+        else:
+            tree[last_node_index][1] = len(tree)
+
+        tree.append([word, None,None])
+        
+    return (tree)
+                </code></pre>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+

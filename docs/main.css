@@ -9,7 +9,8 @@ h2 {
     font-size: 1.5em;
 }
 p,
-ul {
+ul,
+ol {
     font-size: 1.3em;
 }
 .ver {
@@ -29,3 +30,9 @@ td {
 thead {
     font-weight: bold;
 }
+
+pre.blur {
+    filter: blur(0.3rem);
+    user-select: none;
+}
+
