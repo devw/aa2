@@ -66,7 +66,7 @@ class Color(QWidget):
     self.myPalette.setColor(QPalette.Window, QColor(color))
     self.setPalette(self.myPalette)
 
-class Fenetre(QMainWindow):
+class Window(QMainWindow):
   def __init__(self):
     super().__init__()
     self.setWindowTitle("Les Grid Layout")
@@ -82,6 +82,6 @@ class Fenetre(QMainWindow):
 app = QCoreApplication.instance()
 if app is None:
   app = QApplication(sys.argv)
-window = Fenetre()
+window = Window(QMainWindow()
 window.show()
 app.exec_()
