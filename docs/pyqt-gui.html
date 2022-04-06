@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>General Trees</title>
+        <title>PyQt</title>
         <link rel="stylesheet" href="./main.css" />
         <link rel="stylesheet" href="./collapse.css" />
         <script src="vendors/highlight.min.js"></script>
@@ -115,6 +115,142 @@ app.exec_()
                 </div>
             </details>
         </article>
+        <article>
+            <details>
+                <summary>PyQt - Signals & Slots</summary>
+                <h2>Introduction</h2>
+                <p>
+                    A GUI based application is event driven. Functions or methods are executed in response to user's
+                    actions like clicking on a button.
+                </p>
+                <p>
+                    Each PyQt widget, which is derived from QObject class, is designed to emit "signal" in response to
+                    one or more events. The signal on its own does not perform any action. Instead, it is "connected" to
+                    a "slot". The slot can be any callable Python function.
+                </p>
+                <p>This is the code to call a slot_function, when a signal is emitted by a widget.
+                    <pre> <code class="python">widget.signal.connect(slot_function)</code>  </pre>
+                </p>
+                <img src="./images/signals-slots.png" alt="">
+                <h2>Code implementation</h2>
+                <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtCore import Qt, QCoreApplication
+
+class Window(QMainWindow):
+    def __init__(self):
+    super().__init__()
+    self.setWindowTitle("Button title")
+    self.button = QPushButton('Click me!')
+    self.button.clicked.connect(self.onClick)
+    self.setCentralWidget(self.button)
+
+    def onClick(self):
+    print("clic!")
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()        
+                </code></pre>
+            </details>
+        </article>
+
+        <article>
+            <details>
+                <summary>QVBoxLayout and QGridLayout</summary>
+                <h2>QVBoxLayout</h2>
+                <p>The QVBoxLayout class is used to construct vertical box layout objects.</p>
+                <img src="./images/QVBoxLayout.png" alt="">
+                <pre><code  class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout
+from PyQt5.QtGui import QColor, QPalette
+from PyQt5.QtCore import QCoreApplication
+class Color(QWidget):
+  def __init__(self, color):
+    super().__init__()
+    self.setAutoFillBackground(True) 
+    self.myPalette = self.palette() 
+    self.myPalette.setColor(QPalette.Window, QColor(color))
+    self.setPalette(self.myPalette) 
+
+class Window(QMainWindow):
+  def __init__(self):
+    super().__init__()
+    self.setWindowTitle("Vertical Box Layouts")
+    self.layout = QVBoxLayout()
+    self.layout.addWidget(Color('red'))
+    self.layout.addWidget(Color('blue'))
+    self.widget = QWidget()
+    self.widget.setLayout(self.layout)
+    self.setCentralWidget(self.widget)
+
+app = QCoreApplication.instance()
+if app is None:
+  app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+                </code></pre>
+                <h2>QGridLayout</h2>
+                <p>The QGridLayout arranges your elements in a grid.
+                    Each widget has its coordinates expressed in row, column.</p>
+                    <p>You do not need to fill in all the columns of the grid.</p>
+                <pre><code class="python">
+import sys 
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout
+from PyQt5.QtGui import QColor, QPalette
+from PyQt5.QtCore import QCoreApplication
+
+class Color(QWidget):
+    def __init__(self, color):
+    super().__init__()
+    self.setAutoFillBackground(True)
+    self.myPalette = self.palette()
+    self.myPalette.setColor(QPalette.Window, QColor(color))
+    self.setPalette(self.myPalette)
+
+class Fenetre(QMainWindow):
+    def __init__(self):
+    super().__init__()
+    self.setWindowTitle("Les Grid Layout")
+    self.layout = QGridLayout()
+    self.layout.addWidget(Color('red'),0,0)
+    self.layout.addWidget(Color('green'),1,0)
+    self.layout.addWidget(Color('blue'),1,1)
+    self.layout.addWidget(Color('purple'),2,1)
+    self.widget = QWidget()
+    self.widget.setLayout(self.layout)
+    self.setCentralWidget(self.widget)
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Fenetre()
+window.show()
+app.exec_()
+                </code></pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Exercises</summary>
+                <h2>Exercise 1</h2>
+                <p>Using the Color class and a QHBoxLayout, represent the flag of
+                    France .
+                    Using the Color class and a QVBoxLayout represent the flag of
+                    Germany.</p>
+                <h2>Exercise 2</h2>
+                <p>Using a QGridLayout and the Color class 
+                    represent a 4x4 checkerboard in the main window as shown in this figure.</p>
+                    <img src="./images/pyqt-ex-2.jpg" alt="">
+            </details>
+        </article>
+
     </body>
     <script>
         hljs.highlightAll();

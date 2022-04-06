@@ -31,3 +31,8 @@ thead {
     font-weight: bold;
 }
 
+pre.blur {
+    filter: blur(0.3rem);
+    user-select: none;
+}
+

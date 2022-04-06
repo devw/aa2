@@ -56,13 +56,17 @@ def ajouterfichier(fichier,arbre = None):
 # print(res)
 
 def get_data(fName):
+    from urllib.request import urlopen
+    response = urlopen("https://raw.githubusercontent.com/devw/spen/feat/PyQt-GUI/docs/scripts/words.txt")
+    return response.read().decode('utf-8').split("\n")
+    return data.split("\n")
     f = open(fName,"r", encoding='utf-8')
     return f.readlines()
 
 def get_words(data):
     words = []
     for word in data:
-        words.append(word.rstrip())
+        words.append(word.rstrip("\n"))
     return words
 
 def get_label(node):

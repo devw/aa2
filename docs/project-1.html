@@ -30,7 +30,8 @@
                 <p>
                     In one week, a new corpus of words will be provided to you (words-big.txt). You will need to
                     implement an insertion function in the existing tree. The insertion of a new element should have a
-                    time complexity equal to O(log(n)). However, this requires your data structure to be balanced.
+                    time complexity equal to O(log(n)). However, this requires your data structure to be balanced
+                    (perfect binary tree).
                 </p>
             </details>
         </article>
@@ -59,12 +60,74 @@
         <article>
             <details>
                 <summary>Code Hints</summary>
+                <h2>Functions' name</h2>
                 <pre>
+
+                
                 <code class="python">
+
 def main():
-    pass
+    fName = '/tmp/words.txt' 
+    raw_data = get_data(fName)
+    words = get_words(raw_data)
+    tree = get_tree(words)
+    print(tree)
+
+main()
                 </code>
             </pre>
+                <h2>get_data function</h2>
+                <pre>
+                <code class="python">
+# first solution
+def get_data(fName):
+    f = open(fName,"r", encoding='utf-8')
+    return f.readlines()
+
+# second solution
+def get_data(url):
+    from urllib.request import urlopen
+    response = urlopen(url)
+    return response.read().decode('utf-8').split("\n")
+         
+                </code>
+            </pre>
+
+                <h2>get_words function</h2>
+                <pre><code class="python">
+def get_words(data):
+    words = []
+    for word in data:
+        words.append(word.rstrip("\n"))
+    return words
+</code></pre>
+                <h2>get_tree function</h2>
+                <pre class="blur"><code class="python">
+def get_tree(words):
+    tree=[]
+    tree.append([words.pop(0), None, None])
+        
+    for word in words:
+        node_index = 0
+        side = None
+        while node_index != None:
+            last_node_index = node_index
+            if word > get_label(tree[node_index]): 
+                node_index = tree[node_index][2] 
+                side = "right"
+            else:
+                node_index = tree[node_index][1]
+                side = "left"
+
+        if side == "right":
+            tree[last_node_index][2] = len(tree)
+        else:
+            tree[last_node_index][1] = len(tree)
+
+        tree.append([word, None,None])
+        
+    return (tree)
+                </code></pre>
             </details>
         </article>
     </body>
