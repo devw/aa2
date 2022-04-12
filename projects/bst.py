@@ -63,7 +63,7 @@ def ajouterfichier(fichier, arbre=None):
 
 # res = ajouterfichier("/tmp/words.txt")
 # print(res)
-URL = "http://localhost:5501/projects/words.txt"
+URL = "https://raw.githubusercontent.com/devw/spen/main/projects/words.txt"
 
 
 def get_words(url=URL):

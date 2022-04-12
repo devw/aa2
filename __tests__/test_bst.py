@@ -3,7 +3,7 @@ from projects.bst import get_words, get_tree
 
 
 @pytest.mark.parametrize('url', [
-    ("http://localhost:5501/projects/words.txt"),
+    ("https://raw.githubusercontent.com/devw/spen/main/projects/words.txt"),
 ])
 def test_get_words(url):
     words = get_words(url)
