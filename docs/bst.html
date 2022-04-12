@@ -202,7 +202,7 @@ tree = [
 tree = [
     (16, [1,2]), 
     (11, [3,4]), (33, [5,6]), 
-    (6, [-1,7]), (14, []), (30, []), (35, []), 
+    (6, [None,7]), (14, []), (30, []), (35, []), 
     (10, [])
 ]
 
@@ -250,7 +250,7 @@ def search_rec(tree, node, x):
     else:
         return search_rec(tree, get_right(tree, node), x)            
 
-print(search_rec(tree, (16, [1, 2]), 6)) # -> (6, [-1, 7])
+print(search_rec(tree, (16, [1, 2]), 6)) # -> (6, [None, 7])
 
 #### Iteration (loop)
 def search_iter(tree, node, x):
@@ -262,7 +262,7 @@ def search_iter(tree, node, x):
             node = get_right(tree,node)
     return node
 
-print(search_iter(tree, (16, [1, 2]), 6)) # -> (6, [-1, 7])
+print(search_iter(tree, (16, [1, 2]), 6)) # -> (6, [None, 7])
 </code>
                     </pre>
                 </div>

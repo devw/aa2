@@ -6,5 +6,9 @@
     "titleBar.activeBackground": "#b33434",
     "titleBar.activeForeground": "#F6FCE8"
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "liveServer.settings.port": 5501,
+  "files.exclude": {
+    "*/__pycache__": true,
+  }
 }

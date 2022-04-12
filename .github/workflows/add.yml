@@ -1,0 +1,13 @@
+name: test:add-function
+on:
+  workflow_dispatch:
+jobs:
+  gitHubActionForPytest:
+    name: Add Function Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Test Add Function
+        uses: cclauss/GitHub-Action-for-pytest@master
+        with:
+          args: python setup.py develop && pytest __tests__/test_add.py -vs

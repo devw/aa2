@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hash Table</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <!-- https://junminlee3.medium.com/hash-tables-animations-that-will-make-you-understand-how-they-work-d1bcc850ba71 -->
+        <article id="introduction">
+            <details>
+                <summary>Hash Table Definition</summary>
+                <h2>Introduction</h2>
+                <p>Tree structures allow ...</p>
+                <img class="size-l" src="images/ht/brute-force.gif" alt="" />
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Hash Functions</summary>
+                <h2>Introduction</h2>
+                <p>
+                    A hash function over a set 𝑋 is a function 𝐻 that takes an element 𝑥 in 𝑋 and associates to 𝑥 an
+                    integer 𝐻 (𝑥 ) in the interval [0, 𝑀 ), for some integer 𝑀 . In symbols
+                    <pre>
+                        𝐻 ∶𝑋 → [0,𝑀)
+                    </pre>
+                </p>
+                <img class="size-l" src="./images/ht/hash-function.gif" alt="" />
+                <img class="size-l" src="./images/ht/hash-function-module.gif" alt="" />
+                <div>
+                    <h2>Hash Collission</h2>
+                    <p></p>
+                    <img class="size-l" src="./images/ht/hash-function-collision.gif" alt="" />
+                </div>
+                <div>
+                    <h2>Hashing with Open Addressing</h2>
+                    <p>The open addressing is a technique for collision resolution.</p>
+                    <p>We can define open addressing in a general way as a hash table algorithm where the data always stay within the same vector. </p>
+                    <p>
+                        It inserts the data into the hash table itself. The size of the hash table should be larger than
+                        the number of keys.
+                    </p>
+                    <img class="size-l" src="./images/ht/hash-open.addressing.gif" alt="" />
+                </div>
+                <div>
+                    <h2>Hashing with Separate Chaining</h2>
+                    <p>The open addressing is a technique for collision resolution.</p>
+                    <p>
+                        It inserts the data into the hash table itself. The size of the hash table should be larger than
+                        the number of keys.
+                    </p>
+                    <img class="size-l" src="./images/ht/hash.separate-chaining.gif" alt="" />
+                </div>
+            </details>
+        </article>
+        <article id="terminology">
+            <details>
+                <summary>Hash Table Terminology</summary>
+                <div>
+                    <h2>Root</h2>
+                    <pre><code class="python">
+tree = [
+    (16, [1,2]), 
+    (11, [3,4]), (33, [5,6]), 
+    (6, [-1,7]), (14, []), (30, []), (35, []), 
+    (10, [])
+]
+
+def get_tree(tree):
+    return tree
+                        </code>
+                    </pre>
+                </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+
