@@ -1,0 +1,13 @@
+name: test:binary-search-tree
+on:
+  workflow_dispatch:
+jobs:
+  gitHubActionForPytest:
+    name: Test Binary Search Tree
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Test Binary Search Tree
+        uses: cclauss/GitHub-Action-for-pytest@master
+        with:
+          args: python setup.py develop && pytest __tests__/test_bst.py -vs
