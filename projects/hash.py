@@ -1,12 +1,9 @@
 def str2int(str):
     # The ord() function returns an integer representing the Unicode character.
     sum = 0
-    for char in str:
-        sum = sum + ord(char) * 6
+    for i, char in enumerate(str):
+        sum = sum + ord(char) * (i + 1)
     return sum
-
-
-print(str2int("Blop"))
 
 
 def get_hash(s):
