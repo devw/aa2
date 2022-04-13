@@ -17,5 +17,6 @@ def test_get_hash(words):
     if len(words) > 1:
         hash_1 = get_hash(word[0])
         hash_2 = get_hash(word[1])
-        print(f"hash_1 vs hash_2 = {hash_1}, {hash_2}")
+        print(
+            f"\n******hash_1 vs hash_2 test:\n {word[0]} -> {hash_1},\n {word[1]} -> {hash_2}")
         assert hash_1 is not hash_2
