@@ -39,3 +39,6 @@ pre.blur {
     user-select: none;
 }
 
+var {
+    font-size: 1.5em;
+}
