@@ -1,5 +1,5 @@
 import pytest
-from projects.bst import get_words, get_tree
+from projects.bst import get_words, get_tree, search_bst
 
 
 @pytest.mark.parametrize('url', [
@@ -28,3 +28,14 @@ def test_get_tree(list, expected):
     tree = get_tree(list)
     print(f"\ntest_get_tree: {tree} , {expected}")
     assert tree == expected
+
+
+@pytest.mark.parametrize('tree, word, expected', [
+    ([['b', 1, 3], ['a', None, 2], ['ab', None, None], ['d', None, None]], 'abc', None),
+    ([['b', 1, 3], ['a', None, 2], ['ab', None, None],
+      ['d', None, None]], 'a',  ['a', None, 2])
+])
+def test_search_bst(tree, word, expected):
+    result = search_bst(tree, word)
+    print(f"\ntest_search_bst: {tree}\n {word} , {expected}")
+    assert result == expected
