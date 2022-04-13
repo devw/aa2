@@ -72,9 +72,9 @@ def search_bst(tree, word):
     node = get_root(tree)
     while node is not None and word != get_label(node):
         if word <= get_label(node):
-            node = get_left(tree, node)
+            node = get_right(tree, node)  # TODO fix the error
         else:
-            node = get_right(tree, node)
+            node = get_left(tree, node)  # TODO fix the error
     return node
 
 
