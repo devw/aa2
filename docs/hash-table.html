@@ -13,6 +13,7 @@
     </head>
     <body>
         <!-- https://junminlee3.medium.com/hash-tables-animations-that-will-make-you-understand-how-they-work-d1bcc850ba71 -->
+        <!-- /Users/antonio/Downloads/Lecture17.pdf -->
         <article id="introduction">
             <details>
                 <summary>The Map Data Structure</summary>
@@ -27,14 +28,14 @@
                 <var>hash: KEYS -> {0, 1, 2, ..., n - 1}</var>
                 <img class="size-l" src="images/ht/brute-force.gif" alt="" />
                 <h2>Example</h2>
-                <p>Suppose we have a set of strings {“abc”, “def”, “ghi”} that we’d like to store in a table. Our objective here is to find or update them quickly from a table, actually in O(1). We are not concerned about ordering them or maintaining any order at all. Let us think of a simple schema to do this. Suppose we assign “a” = 1, “b”=2, ... etc to all alphabetical characters. We can then simply compute a number for each of the strings by using the sum of the characters as follows.</p>
+                <p>Suppose we have a set of strings {“abc”, “def”, “ghi”} that we'd like to store in a table. Our objective here is to find or update them quickly from a table, actually in O(1). We are not concerned about ordering them or maintaining any order at all. Let us think of a simple schema to do this. Suppose we assign “a” = 1, “b”=2, ... etc to all alphabetical characters. We can then simply compute a number for each of the strings by using the sum of the characters as follows.</p>
                 <var>“abc”=1+2+3=6, “def”=4+5+6=15 , “ghi”=7+8+9=24</var>
                 <p>If we assume that we have a table of size 5 to store these strings, we can compute the
                     location of the string by taking the sum mod 5. So we will then store “abc” in 6 mod 5 = 1,“def” in 15 mod 5 = 0, and “ghi” in 24 mod 5 = 4 in locations 1, 0 and 4 as follows.</p>
                 <pre><code class="python">
                     ["def", "abc", Null, Null, "ghi", Null]
                 </code></pre>
-                <h2>HAsh Function Definition</h2>
+                <h2>Hash Function Definition</h2>
                 <p>
                     A hash function over a set 𝑋 is a function 𝐻 that takes an element 𝑥 in 𝑋 and associates to 𝑥 an
                     integer 𝐻 (𝑥 ) in the interval [0, 𝑀 ), for some integer 𝑀 . In symbols
@@ -44,48 +45,114 @@
                 </p>
                 <img class="size-l" src="./images/ht/hash-function.gif" alt="" />
                 <img class="size-l" src="./images/ht/hash-function-module.gif" alt="" />
+                <h2>hash function</h2>
+                <p>
+                    There are three ways of calculating the hash function:
+                    <ul>
+                        <li>Division method</li>
+                        <li>Folding method</li>
+                        <li>Mid square method</li>
+                    </ul>
+                </p>
+                <p>In the division method, the hash function can be defined as:</p>
+<pre class="math">
+h(ki) = ki mod m; 
+//Modulo is a math operation that finds the remainder when one integer is divided by another. 
+// In writing, it is frequently abbreviated as mod, or represented by the symbol %.
+//  where m is the size of the hash table.
+</pre>
+                    
+<p>
+                    For example, if the key value is 6 and the size of the hash table is 10. When we apply the hash function to key 6 then the index would be:
+                </p>             
+                   <var> h(6) = 6 % 10 = 6</var>
+                    <p>
+                    The index is 6 at which the value is stored.</p>
             </details>
         </article>
-        <article>
+        <article id="hash-collision">
             <details>
                 <summary>Problem with Hashing</summary>
                 <h2>Introduction</h2>
                 <p>
 
-                    The method discussed above seems too good to be true as we begin to think more about the hash function. 
-                    First of all, the hash function we used, that is the sum of the letters, is a bad one. In case we have permutations of the same letters, “abc”, “bac” etc in the set, we will end up with the same value for the sum and hence the key. In this case, the strings would hash into the same location, creating what we call a “collision”. This is obviously not a good thing. Secondly, we need to find a good table size, preferably a prime number so that even if the sums are different, then collisions can be avoided, when we take mod of the sum to find the location. So we ask two questions.
+                    The hash function we used, that is the sum of the letters, is a bad one. In case we have permutations of the same letters, “abc”, “bac” etc in the set, we will end up with the same value for the sum and hence the key. In this case, the strings would hash into the same location, creating what we call a “collision”. This is obviously not a good thing. Secondly, we need to find a good table size, preferably a prime number so that even if the sums are different, then collisions can be avoided, when we take mod of the sum to find the location. So we ask two questions.
                 </p>
                 <ul>
                     <li>Question 1: How do we pick a good hash function?</li>
                     <li>Question 2: How do we deal with collisions?</li>
                 </ul>
-
                 <div>
                     <h2>Hash Collission</h2>
                     <p></p>
                     <img class="size-l" src="./images/ht/hash-function-collision.gif" alt="" />
-                </div>
-                <div>
-                    <h2>Hashing with Open Addressing</h2>
-                    <p>The open addressing is a technique for collision resolution.</p>
-                    <p>We can define open addressing in a general way as a hash table algorithm where the data always stay within the same vector. </p>
-                    <p>
-                        It inserts the data into the hash table itself. The size of the hash table should be larger than
-                        the number of keys.
-                    </p>
-                    <img class="size-l" src="./images/ht/hash-open.addressing.gif" alt="" />
-                </div>
-                <div>
-                    <h2>Hashing with Separate Chaining</h2>
-                    <p>The open addressing is a technique for collision resolution.</p>
-                    <p>
-                        It inserts the data into the hash table itself. The size of the hash table should be larger than
-                        the number of keys.
-                    </p>
-                    <img class="size-l" src="./images/ht/hash.separate-chaining.gif" alt="" />
+                    <p>To handle hash collisions we can use two techniques: 1) closed addressing and 2) open addressing</p>
                 </div>
             </details>
         </article>
+        <article id="open-addressing">
+            <details>
+                <summary>Open Hashing (Closed Addressing)</summary>
+                <p>Open hashing is also known as closed addressing</p>
+                <p>
+                    The "open" in "open hashing" refers to the fact that we leave the hash table; we do not guarantee that the object is stored directly at an index in the hash table's internal array.
+                </p>
+                <p>
+                    The "close" in "closed addressing" tells us the index (aka. address) at which an object will be stored in the hash table is completely determined by its hash code. Indeed, the object's index does not vary regardless of what's already in the hash table.
+                </p>
+
+                <div id="hashing-separate-chaining">
+                    <h2>Chaining Method</h2>
+                    <p>In open hashing, one of the methods used to resolve the collision is known as a chaining method</p>
+                    <img class="size-l" src="./images/separate-chaining.png" alt="">
+                    <img class="size-l" src="./images/ht/hash.separate-chaining.gif" alt="" />
+                    <p>
+                        Suppose to place the values 12, 17, 29, 33, 42 and 39 with this hash function 
+                    </p>
+                    <var>h (x) = (x mod 10) + 1</var>
+                    <p>We will obtain the following table (the new additions are made at the beginning of the list).</p>
+                    <img src="./images/hash-collision-separate-chaining.png" alt="">
+                    <p class="info">The NIL value indicated above represents an empty value, it is a constant often used in Algorithms. In python it is designated as None</p>
+                </div>
+            </details>
+        </article>
+        <article id="open-addressing">
+            <details>
+                <summary>Closed Hashing (Open Addressing)</summary>
+                <p>Closed Hashing is also known as open addressing</p>
+                <div>
+                    <h2>Hashing with Open Addressing</h2>
+                    <p>The open addressing is a technique for collision resolution.</p>
+                    <p>The open addressing technique ensures that the data always remains within the same vector.</p>
+                    <p>
+                        It inserts the data into the hash table itself. The size of the hash table should be larger than
+                        the number of keys.
+                    </p>
+                    <p>
+                        The "open" in "open addressing" tells us the index (aka. address) at which an object will be stored in the hash table is not completely determined by its hash code. Instead, the index may vary depending on what's already in the hash table.
+                    </p>
+                    <p>
+                        The "closed" in "closed hashing" refers to the fact that we never leave the hash table; every object is stored directly at an index in the hash table's internal array. Note that this is only possible by using some sort of open addressing strategy. This explains why "closed hashing" and "open addressing" are synonyms.
+                    </p>
+                </div>
+                <div>
+                    <h2>Handling Overflow with Linear Probing</h2>
+                    <img class="size-l" src="./images/ht/hash-open.addressing.gif" alt="" />
+                </div>
+                <div>
+                    <h2>Handling Overflow with Re-Hashing (Double Hashing)</h2>
+                    <img src="./images/overflow-area.gif" alt="">
+                </div>
+
+            </details>
+        </article>
+        <!-- 1573625332.pdf -->
+        <!-- <article><details><summary>Practice Problems on Hashing</summary>
+            <h2></h2>
+            <ul>
+                <li>What are the advantages and disadvantages of hash tables compared to binary search trees?</li>
+            </ul>
+        </details></article> -->
     </body>
     <script>
         hljs.highlightAll();
