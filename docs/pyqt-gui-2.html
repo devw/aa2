@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PyQt</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="introduction-pyqt">
+            <details>
+                <summary>QLineEdit and QTextEdit</summary>
+                <div>
+                    <h2>QLineEdit</h2>
+                    <img src="./images/QLineEdit.png" alt="" />
+                    <p>A line edit allows the user to enter and edit a single line of plain text.</p>
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLineEdit
+from PyQt5.QtCore import QCoreApplication
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("My Title")
+        self.lineEdit = QLineEdit()
+        self.lineEdit.setMaxLength(10)
+        self.lineEdit.setPlaceholderText("Enter yout text")
+        self.setCentralWidget(self.lineEdit)
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+                    </code></pre>
+                </div>
+                <div></div>
+
+                <div>
+                    <h2>Introduction</h2>
+                    <p>The QTextEdit class provides a widget that is used to edit and display text.</p>
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit
+from PyQt5.QtCore import QCoreApplication
+
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("My Title")
+        self.textEdit = QTextEdit()
+        self.textEdit.setText("The first line of text.")
+        self.textEdit.append("Another text line!")
+        self.textEdit.textChanged.connect(self.text_changed)
+        self.setCentralWidget(self.textEdit)
+
+    def text_changed(self):
+        print("The text changed!")
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+                        
+</code></pre>
+                </div>
+                    <div>
+                        <h2>Exercise 1</h2>
+                        <p>
+                            Using a QLineEdit, QPushButton and QVBoxLayout, write a program that displays the image
+                            below. The click of the button must display exactly what is in the text field, with the text
+                            "You typed:" Don't forget the text() method to retrieve the text of a lineEdit...
+                        </p>
+                        <img class="l-500" src="./images/exercise-1.png" alt="" />
+                        <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QMessageBox, QPushButton, QLineEdit
+from PyQt5.QtCore import QCoreApplication
+                            
+                            
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Exercice 1")
+        self.layout = QVBoxLayout()
+
+        self.lineEdit = QLineEdit()
+        self.button = QPushButton("Show Text")
+
+        self.button.clicked.connect(self.onClick)
+
+        self.layout.addWidget(self.lineEdit)   # Ici je met ma QLineEdit
+        self.layout.addWidget(self.button)   # Ici je met mon bouton
+
+        self.widget = QWidget()
+        self.widget.setLayout(self.layout)
+        self.setCentralWidget(self.widget)
+
+    def onClick(self):
+        self.popup = QMessageBox(
+            QMessageBox.Information, 'Message', 'You typed: ' + self.lineEdit.text())
+        self.popup.show()
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+
+window = Window()
+window.show()
+
+app.exec_()
+
+                        </code></pre>
+                    </div>
+                </summary>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>QCheckBox and QSpinBox</summary>
+                <div>
+                    <h2>QCheckBox Class</h2>
+                    <p>The QCheckBox widget provides a checkbox with a text label.</p>
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QCheckBox
+from PyQt5.QtCore import QCoreApplication
+
+class Fenetre(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Case à cocher")
+        self.checkbox = QCheckBox("IHM is the best")
+        self.checkbox.setCheckState(2)
+        self.checkbox.stateChanged.connect(self.state_changed)
+        self.setCentralWidget(self.checkbox)
+
+    def state_changed(self, s):
+        print(s)
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Fenetre()
+window.show()
+app.exec()
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>QSpinBox Class</h2>
+                    <p>The QSpinBox class provides a spin box widget.</p>
+                    <pre><code class="python">
+class Window(QMainWindow):
+def __init__(self):
+    super().__init__()
+    self.setWindowTitle("Numeric value: spinbox")
+    self.spinbox = QSpinBox()
+    self.spinbox.setMinimum(-10)
+    self.spinbox.setMaximum(3)
+    self.spinbox.setSingleStep(3)
+    self.spinbox.valueChanged.connect(self.value_changed)
+    self.setCentralWidget(self.spinbox)
+
+def value_changed(self, s):
+    print(s)
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Exercise 2</h2>
+                   
+                </div>
+            </details>
+        </article>
+        <article id="QSlider">
+            <details>
+                <summary>QSlider</summary>
+                <div>
+                    <h2>QSlider Class</h2>
+                    <p>The QSlider widget provides a vertical or horizontal slider.</p>
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QSlider
+from PyQt5.QtCore import QCoreApplication
+
+
+class Fenetre(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("QSlider")
+        self.slider = QSlider()
+        # Décommentez la ligne suivante pour un slider horizontal
+        # self.slider = QSlider(Qt.Horizontal)
+        self.slider.setMinimum(-20)
+        self.slider.setMaximum(20)
+        self.slider.sliderMoved.connect(self.slider_position)
+        self.setCentralWidget(self.slider)
+
+    def slider_position(self, v):
+        print("Slider est à :", v)
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Fenetre()
+window.show()
+app.exec_()
+                        
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Exercise 3</h2>
+                    <p>
+                        Write a program that displays two horizontal QSliders one on top of each other. Each time the
+                        cursor is moved, a personalized message is displayed to indicate its position; for example: "the
+                        top slider is 25" or "the bottom slider is 42".
+                    </p>
+                    <img src="./images/slider-exercise.png" alt="">
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QSlider)
+from PyQt5.QtCore import Qt
+
+
+class Spin(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.layout = QVBoxLayout()
+        for i in range(0, 2):
+
+            self.slider = QSlider(Qt.Horizontal)
+            self.slider.setMinimum(-20)
+            self.slider.setMaximum(20)
+            self.layout.addWidget(self.slider, i)
+            self.slider.sliderMoved.connect(self.sld_up)
+        self.setLayout(self.layout)
+
+    def sld_up(self, s):
+        if self.sender().y() == 20:
+            print('The top slider is at : ' + str(s))
+        else:
+            print('The bottom slider is at : ' + str(s))
+
+
+app = QApplication.instance()
+if not app:
+    app = QApplication(sys.argv)
+but = Spin()
+but.show()
+app.exec()
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+        <article id="QInputDialog">
+            <details>
+                <summary>QInputDialog</summary>
+                <div>
+                    <h2>QInputDialog Class</h2>
+                    <p>
+                        The QInputDialog class provides a simple convenience dialog to get a single value from the user. <a href="https://doc.qt.io/qt-5/qinputdialog.html">QInputDialog Class</a>
+                    </p>
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QInputDialog
+from PyQt5.QtCore import QCoreApplication
+
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.btn = QPushButton('Open the dialog box', self)
+        self.btn.move(20, 20)
+        self.btn.clicked.connect(self.showDialog)
+        self.label = QLabel('you typed', self)
+        self.label.move(20, 120)
+        self.le = QLineEdit(self)
+        self.le.move(170, 120)
+        self.setGeometry(300, 300, 450, 350)
+        self.setWindowTitle('Dialog box')
+        self.show()
+
+    def showDialog(self):
+        text, ok = QInputDialog.getText(self, 'Dialogue', 'Enter tour name:')
+        if ok:
+            self.le.setText(text)
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+app.exec_()
+                        
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Exercise</h2>
+                    <p>Write a program to display a window similar to the below image.
+                        You will take care to inherit the main QWidget window and place the two sub widgets (a label and a QcomboBox) without using a layout.
+                        The change of option in the QComboBox causes a change of option in the label.</p>
+                        <img src="./images/combo.png" alt="">
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QComboBox
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QLabel
+
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('QComboBox')
+        self.setGeometry(300, 300, 450, 350)
+        self.combo = QComboBox(self)
+        self.combo.addItem('Ubuntu')
+        self.combo.addItem('Mandriva')
+        self.combo.addItem('Fedora')
+        self.combo.addItem('Arch')
+        self.combo.addItem('Gentoo')
+        self.combo.activated[str].connect(self.onActivated)
+        self.label = QLabel('Ubuntu', self)
+        self.label.setFixedWidth(100)
+
+        self.combo.move(60, 50)
+        self.label.move(200, 50)
+
+    def onActivated(self, text):
+        self.label.setText(text)
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+
+window = Window()
+window.show()
+app.exec()
+                        
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>QFileDialog and QFile</summary>
+                <div>
+                    <h2>QFileDialog Class</h2>
+                    <p>The QFileDialog class provides a dialog that allow users to select files or directories. <a href="https://doc.qt.io/qt-5/qfiledialog.html">QFileDialog Class</a></p>
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt5.QtCore import Qt, QCoreApplication
+
+
+class Window(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        fileDialog = QFileDialog()
+        path = fileDialog.getOpenFileName(
+            parent=None, caption='Open File', filter='Encrypted (*.ch);;Decrypted (*.dech)')
+        print(path)
+
+    def initUI(self):
+        self.setWindowTitle('Window Title')
+        self.move(300, 300)
+        self.show()
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>QFile Class</h2>
+                    <p>The QFile class provides an interface for reading from and writing to files. <a href="https://doc.qt.io/qt-5/qfile.html">QFile Class</a></p>
+                    <pre><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtCore import QCoreApplication, QFile, QTextStream
+
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        file = QFile('/tmp/test.log')
+        ok = file.open(QFile.WriteOnly)
+        if ok:
+            textStream = QTextStream(file)
+            textStream << 'Some text\nAnother Line'
+            file.close()
+        else:
+            print('Problem while opening file.')
+
+    def initUI(self):
+        self.setWindowTitle('Writing a file to disk')
+        self.move(300, 300)
+        self.show()
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec()
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Final Exercise</summary>
+                <div>
+                    <h2>QTextEdit, Button, Label</h2> 
+                
+                <p>Create a GUI that displays a QTextEdit along with two
+                    elements:
+                </p>
+                <p>
+                    <ul>
+                        <li>
+                            A label that represents the current number of characters the user has written and that updates with each user keystroke.
+                        </li>
+                        <li>
+                            An "open" button that calls getOpenFileName to display the whole
+                            image files (.gif, .jpg, .jpeg, .png) of the current folder. As soon as the user chooses a file, the name of the file is written in the QTextEdit.
+                        </li>
+                    </ul>
+                </p>  
+                <p>
+                    Hint: To get the current character count of a QTextEdit stored in
+                    a textEdit variable do: len(self.textEdit.toPlainText()). To edit the text
+                    of a label use the setText() method.
+                </p>
+                <pre><code class="python">
+import sys
+import os
+from PyQt5.QtWidgets import QApplication,  QWidget, QLabel, QTextEdit, QFileDialog, QPushButton
+from PyQt5.QtCore import QCoreApplication
+
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Window Title')
+        self.setGeometry(300, 300, 200, 100)
+
+        self.textEdit = QTextEdit(self)
+        self.textEdit.move(5, 30)
+        self.textEdit.setFixedHeight(40)
+        self.textEdit.setFixedWidth(100)
+        self.textEdit.textChanged.connect(self.text_changed)
+
+        self.label = QLabel("Number", self)
+        self.label.setFixedWidth(100)
+        self.label.move(150, 30)
+
+        self.btn = QPushButton('Browse files', self)
+        self.btn.move(4, 5)
+        self.btn.clicked.connect(self.showDialog)
+
+    def text_changed(self):
+        self.label.setText(str(len(self.textEdit.toPlainText())))
+
+    def showDialog(self):
+        fileDialog = QFileDialog(self)
+        filePath, _ = fileDialog.getOpenFileName(parent=None, caption='File Explorer',
+                                                    filter=';Images jpg (*.jpg);;Images png (*.png);;Images gif (*.gif);;Images jpeg (*.jpeg)')
+        print(filePath)
+        print(os.path.basename(filePath))
+        fName = os.path.basename(filePath)
+        fName = fName.split(".")[0]
+        self.textEdit.setText(fName)
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec_()
+                    
+                </code></pre>
+            </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+

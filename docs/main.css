@@ -46,3 +46,7 @@ var {
     font-size: 1.5em;
 }
 
+img.l-500 {
+    width: 500px;
+}
+
