@@ -82,6 +82,12 @@ def search_bst(tree, word):
 
 class TestGraphicalInterface(unittest.TestCase):
 
+    def test_get_words(self):
+        URL = "https://raw.githubusercontent.com/devw/spen/main/projects/words.txt"
+        words = get_words(URL)
+        self.assertTrue(words[0] == 'escape')
+        self.assertTrue(words[-1] == 'find')
+
     def test_get_tree(self):
         # test scenario 1
         input = []
