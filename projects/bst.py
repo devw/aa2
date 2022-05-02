@@ -1,6 +1,6 @@
 import ssl
 from urllib.request import urlopen
-
+import unittest
 
 # res = ajouterfichier("/tmp/words.txt")
 # print(res)
@@ -77,9 +77,49 @@ def search_bst(tree, word):
             node = get_right(tree, node)
     return node
 
+### Testing ###
 
-tree = get_tree(['b', 'a', 'ab', 'd'])
-print(tree)
 
-res = search_bst(tree, "a")
-print(res)
+class TestGraphicalInterface(unittest.TestCase):
+
+    def test_get_tree(self):
+        # test scenario 1
+        input = []
+        output = []
+        self.assertTrue(get_tree(input) == output)
+
+        # test scenario 2
+        input = ['a']
+        self.assertTrue(get_tree(input) == [['a', None, None]])
+
+        # test scenario 2
+        inp = ['a', 'b']
+        out = [['a', None, 1], ['b', None, None]]
+        self.assertTrue(get_tree(inp) == out)
+
+        # test scenario 3
+        inp = ['b', 'a']
+        out = [['b', 1, None], ['a', None, None]]
+        self.assertTrue(get_tree(inp) == out)
+
+        # test scenario 4
+        inp = ['b', 'a', 'ab', 'd']
+        out = [['b', 1, 3], ['a', None, 2], [
+            'ab', None, None], ['d', None, None]]
+        self.assertTrue(get_tree(inp) == out)
+
+    def test_search_bst(self):
+        tree = get_tree(['b', 'a', 'ab', 'd'])
+
+        # test scenario 1
+        self.assertIsNone(search_bst(tree, 'f'))
+
+        # test scenario 2
+        self.assertTrue(search_bst(tree, 'a') == ['a', None, 2])
+
+        # test scenario 3
+        self.assertTrue(search_bst(tree, 'b') == ['b', 1, 3])
+
+
+if __name__ == '__main__':
+    unittest.main()
