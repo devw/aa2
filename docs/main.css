@@ -38,7 +38,11 @@ pre.blur {
     filter: blur(0.3rem);
     user-select: none;
 }
+pre.math {
+    font-size: 1.3em;
+}
 
 var {
     font-size: 1.5em;
 }
+
