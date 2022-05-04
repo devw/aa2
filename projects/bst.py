@@ -69,13 +69,8 @@ def get_tree(words):
 def search_bst(tree, word):
     # it returns None if the word is in the tree,
     # it returns the node containing the word
-    node = get_root(tree)
-    while node is not None and word != get_label(node):
-        if word <= get_label(node):
-            node = get_left(tree, node)
-        else:
-            node = get_right(tree, node)
-    return node
+    pass
+
 
 ### Testing ###
 
@@ -129,3 +124,4 @@ class TestGraphicalInterface(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+#print(get_tree(['B', 'C', 'A']))
