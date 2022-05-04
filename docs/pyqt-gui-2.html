@@ -38,7 +38,7 @@ if app is None:
     app = QApplication(sys.argv)
 window = Window()
 window.show()
-app.exec_()
+app.exec()
                     </code></pre>
                 </div>
                 <div></div>
@@ -71,19 +71,19 @@ if app is None:
     app = QApplication(sys.argv)
 window = Window()
 window.show()
-app.exec_()
+app.exec()
                         
 </code></pre>
                 </div>
                     <div>
                         <h2>Exercise 1</h2>
                         <p>
-                            Using a QLineEdit, QPushButton and QVBoxLayout, write a program that displays the image
+                            Using QVBoxLayout, QLineEdit, QPushButton and QWidget, write a program that displays the image
                             below. The click of the button must display exactly what is in the text field, with the text
-                            "You typed:" Don't forget the text() method to retrieve the text of a lineEdit...
+                            "You typed:" Don't forget the lineEdit.text() method to retrieve the text of a lineEdit...
                         </p>
                         <img class="l-500" src="./images/exercise-1.png" alt="" />
-                        <pre><code class="python">
+                        <pre class="blur"><code class="python">
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QMessageBox, QPushButton, QLineEdit
 from PyQt5.QtCore import QCoreApplication
@@ -162,20 +162,26 @@ app.exec()
                 <div>
                     <h2>QSpinBox Class</h2>
                     <p>The QSpinBox class provides a spin box widget.</p>
+                    <img src="" alt="">
                     <pre><code class="python">
-class Window(QMainWindow):
-def __init__(self):
-    super().__init__()
-    self.setWindowTitle("Numeric value: spinbox")
-    self.spinbox = QSpinBox()
-    self.spinbox.setMinimum(-10)
-    self.spinbox.setMaximum(3)
-    self.spinbox.setSingleStep(3)
-    self.spinbox.valueChanged.connect(self.value_changed)
-    self.setCentralWidget(self.spinbox)
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QSpinBox
+from PyQt5.QtCore import QCoreApplication
 
-def value_changed(self, s):
-    print(s)
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Numeric value: spinbox")
+        self.spinbox = QSpinBox()
+        self.spinbox.setMinimum(-10)
+        self.spinbox.setMaximum(3)
+        self.spinbox.setSingleStep(3)
+        self.spinbox.valueChanged.connect(self.value_changed)
+        self.setCentralWidget(self.spinbox)
+
+    def value_changed(self, s):
+        print(s)
 
 
 app = QCoreApplication.instance()
@@ -183,12 +189,13 @@ if app is None:
     app = QApplication(sys.argv)
 window = Window()
 window.show()
-app.exec_()
+app.exec()
+
                     </code></pre>
                 </div>
                 <div>
                     <h2>Exercise 2</h2>
-                   
+                   <!-- TODO -->
                 </div>
             </details>
         </article>
@@ -204,28 +211,26 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QSlider
 from PyQt5.QtCore import QCoreApplication
 
 
-class Fenetre(QMainWindow):
+class Window(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("QSlider")
         self.slider = QSlider()
-        # Décommentez la ligne suivante pour un slider horizontal
-        # self.slider = QSlider(Qt.Horizontal)
         self.slider.setMinimum(-20)
         self.slider.setMaximum(20)
         self.slider.sliderMoved.connect(self.slider_position)
         self.setCentralWidget(self.slider)
 
     def slider_position(self, v):
-        print("Slider est à :", v)
+        print("Slider is at:", v)
 
 
 app = QCoreApplication.instance()
 if app is None:
     app = QApplication(sys.argv)
-window = Fenetre()
+window = Window()
 window.show()
-app.exec_()
+app.exec()
                         
                     </code></pre>
                 </div>
@@ -237,7 +242,7 @@ app.exec_()
                         top slider is 25" or "the bottom slider is 42".
                     </p>
                     <img src="./images/slider-exercise.png" alt="">
-                    <pre><code class="python">
+                    <pre class="blur"><code class="python">
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QSlider)
 from PyQt5.QtCore import Qt
@@ -314,7 +319,7 @@ app = QCoreApplication.instance()
 if app is None:
     app = QApplication(sys.argv)
 window = Window()
-app.exec_()
+app.exec()
                         
                     </code></pre>
                 </div>
@@ -324,7 +329,7 @@ app.exec_()
                         You will take care to inherit the main QWidget window and place the two sub widgets (a label and a QcomboBox) without using a layout.
                         The change of option in the QComboBox causes a change of option in the label.</p>
                         <img src="./images/combo.png" alt="">
-                    <pre><code class="python">
+                    <pre class="blur"><code class="python">
 import sys
 from PyQt5.QtWidgets import QApplication, QComboBox
 from PyQt5.QtCore import QCoreApplication
@@ -399,7 +404,7 @@ if app is None:
     app = QApplication(sys.argv)
 window = Window()
 window.show()
-app.exec_()
+app.exec()
                     </code></pre>
                 </div>
                 <div>
@@ -444,8 +449,6 @@ app.exec()
             <details>
                 <summary>Final Exercise</summary>
                 <div>
-                    <h2>QTextEdit, Button, Label</h2> 
-                
                 <p>Create a GUI that displays a QTextEdit along with two
                     elements:
                 </p>
@@ -465,7 +468,8 @@ app.exec()
                     a textEdit variable do: len(self.textEdit.toPlainText()). To edit the text
                     of a label use the setText() method.
                 </p>
-                <pre><code class="python">
+                <!-- TODO make the interface nicer and add an image -->
+                <pre class="blur"><code class="python">
 import sys
 import os
 from PyQt5.QtWidgets import QApplication,  QWidget, QLabel, QTextEdit, QFileDialog, QPushButton
