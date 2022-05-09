@@ -153,6 +153,16 @@ h(ki) = ki mod m;
                 <div>
                     <h2>Handling Overflow with Re-Hashing (Double Hashing)</h2>
                     <img src="./images/overflow-area.gif" alt="">
+                    <p>
+                        Double Hashing is works on a similar idea to linear probing. Whenever a collision occurs, choose another spot in table to put the value.
+                        The difference here is that instead of choosing next opening, a second hash function is used to determine the location of the next spot. For example, given hash function H1 and H2 and key. do the following:
+                    </p>
+                    <ul>
+                        <li>Check location hash1(key). If it is empty, put record in it.</li>
+                        <li>If it is not empty calculate hash2(key).</li>
+                        <li>check if hash1(key)+hash2(key) is open, if it is, put it in.</li>
+                        <li>repeat with hash1(key)+2hash2(key), hash1(key)+3hash2(key) and so on, until an opening is found.</li>
+                    </ul>
                     <!-- TODO -->
                 </div>
 
@@ -161,6 +171,7 @@ h(ki) = ki mod m;
         <article>
             <details>
                 <summary>Load balancing (computing)</summary>
+                <p>If the number of collisions (k) is known the worst case for the Chaining is O(k).</p>
                 <div>
                     <h2>Hash Table Performance - BigO</h2>
                     <table>
@@ -183,7 +194,7 @@ h(ki) = ki mod m;
                             <td>O(1)</td>
                         </tr>
                         <tr>
-                            <td>Re-Hashing</td>
+                            <td>Double-Hashing</td>
                             <td>O(n)</td>
                             <td>O(1)</td>
                             <td>O(1)</td>

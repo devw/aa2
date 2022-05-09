@@ -266,6 +266,41 @@ print(search_iter(tree, (16, [1, 2]), 6)) # -> (6, [None, 7])
 </code>
                     </pre>
                 </div>
+                <div>
+                    <h2>Search Operation 2</h2>
+                    <p>
+                        Search Operation in Binary Search Tree (BST) where the tree is represented as nested list with
+                        depth equal to the depth of the tree
+                    </p>
+                    <pre><code class="python">
+    tree = ['b', ['a', [], ['ab', [], []]], ['d', [], []]]
+                    <img class="w-250" src="./images/tree-of-subtree.png" alt="" />
+
+                    <pre><code class="python">
+# Search Operation in Binary Search Tree (BST) where the tree is represented as
+# nested list with depth equal to the depth of the tree
+
+def search_bst(tree, word):
+    subtree = tree
+
+    while subtree[0] != word and subtree[0] != []:
+        if word < subtree[0]:
+            if subtree[1] == []:
+                return []
+            else:
+                subtree = subtree[1]
+        else:
+            if subtree[2] == []:
+                return []
+            else:
+                subtree = subtree[2]
+    return subtree[0]
+
+tree = ['b', ['a', [], ['ab', [], []]], ['d', [], []]]
+res = search_bst(tree, 'das')
+print("search_bst:", res)
+                    </code></pre>
+                </div>
             </details>
         </article>
     </body>

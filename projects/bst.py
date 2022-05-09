@@ -67,11 +67,42 @@ def get_tree(words):
 
 
 def search_bst(tree, word):
-    # it returns None if the word is in the tree,
-    # it returns the node containing the word
-    pass
+    node = tree[0]
+
+    while node[0] != word and node != None:
+        if word < node[0]:
+            if node[1] == None:
+                return None
+            else:
+                node = tree[node[1]]
+        else:
+            if node[2] == None:
+                return None
+            else:
+                node = tree[node[2]]
+    return node
 
 
+def search_bst_2(tree, word):
+    subtree = tree
+
+    while subtree[0] != word and subtree[0] != []:
+        if word < subtree[0]:
+            if subtree[1] == []:
+                return []
+            else:
+                subtree = subtree[1]
+        else:
+            if subtree[2] == []:
+                return []
+            else:
+                subtree = subtree[2]
+    return subtree[0]
+
+
+tree_2 = ['b', ['a', [], ['ab', [], []]], ['d', [], []]]
+res = search_bst_2(tree_2, 'ab')
+print("search_bst_2:", res)
 ### Testing ###
 
 
