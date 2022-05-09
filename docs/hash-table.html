@@ -93,17 +93,21 @@ h(ki) = ki mod m;
         <article id="open-addressing">
             <details>
                 <summary>Open Hashing (Closed Addressing)</summary>
-                <p>Open hashing is also known as closed addressing</p>
-                <p>
-                    The "open" in "open hashing" refers to the fact that we leave the hash table; we do not guarantee that the object is stored directly at an index in the hash table's internal array.
-                </p>
-                <p>
-                    The "close" in "closed addressing" tells us the index (aka. address) at which an object will be stored in the hash table is completely determined by its hash code. Indeed, the object's index does not vary regardless of what's already in the hash table.
-                </p>
+                <div>
+                    <h2>Introduction</h2>
+                    <p>Open hashing is also known as closed addressing</p>
+                    <p>
+                        The "open" in "open hashing" refers to the fact that we leave the hash table; we do not guarantee that the object is stored directly at an index in the hash table's internal array.
+                    </p>
+                    <p>
+                        The "close" in "closed addressing" tells us the index (aka. address) at which an object will be stored in the hash table is completely determined by its hash code. Indeed, the object's index does not vary regardless of what's already in the hash table.
+                    </p>
+                </div>
+               
 
                 <div id="hashing-separate-chaining">
                     <h2>Chaining Method</h2>
-                    <p>In open hashing, one of the methods used to resolve the collision is known as a chaining method</p>
+                    <p>In open hashing, one of the methods used to resolve the collision is known as a chaining method.</p>
                     <img class="size-l" src="./images/separate-chaining.png" alt="">
                     <img class="size-l" src="./images/ht/hash.separate-chaining.gif" alt="" />
                     <p>
@@ -114,14 +118,18 @@ h(ki) = ki mod m;
                     <img src="./images/hash-collision-separate-chaining.png" alt="">
                     <p class="info">The NIL value indicated above represents an empty value, it is a constant often used in Algorithms. In python it is designated as None</p>
                 </div>
+                <div>
+                    <h2>Example</h2>
+                    <img src="./images/chaining-method.png" alt="">
+                </div>
             </details>
         </article>
         <article id="open-addressing">
             <details>
                 <summary>Closed Hashing (Open Addressing)</summary>
-                <p>Closed Hashing is also known as open addressing</p>
                 <div>
-                    <h2>Hashing with Open Addressing</h2>
+                    <h2>Introduction</h2>
+                    <p>Closed Hashing is also known as open addressing</p>
                     <p>The open addressing is a technique for collision resolution.</p>
                     <p>The open addressing technique ensures that the data always remains within the same vector.</p>
                     <p>
@@ -138,12 +146,76 @@ h(ki) = ki mod m;
                 <div>
                     <h2>Handling Overflow with Linear Probing</h2>
                     <img class="size-l" src="./images/ht/hash-open.addressing.gif" alt="" />
+                    <h2>Example</h2>
+                    <img class="size-l" src="./images/linear.probing.png" alt="" />
+                    <!-- TODO -->
                 </div>
                 <div>
                     <h2>Handling Overflow with Re-Hashing (Double Hashing)</h2>
                     <img src="./images/overflow-area.gif" alt="">
+                    <p>
+                        Double Hashing is works on a similar idea to linear probing. Whenever a collision occurs, choose another spot in table to put the value.
+                        The difference here is that instead of choosing next opening, a second hash function is used to determine the location of the next spot. For example, given hash function H1 and H2 and key. do the following:
+                    </p>
+                    <ul>
+                        <li>Check location hash1(key). If it is empty, put record in it.</li>
+                        <li>If it is not empty calculate hash2(key).</li>
+                        <li>check if hash1(key)+hash2(key) is open, if it is, put it in.</li>
+                        <li>repeat with hash1(key)+2hash2(key), hash1(key)+3hash2(key) and so on, until an opening is found.</li>
+                    </ul>
+                    <!-- TODO -->
                 </div>
 
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Load balancing (computing)</summary>
+                <p>If the number of collisions (k) is known the worst case for the Chaining is O(k).</p>
+                <div>
+                    <h2>Hash Table Performance - BigO</h2>
+                    <table>
+                        <tr>
+                            <td>-</td>
+                            <td>Worst Case</td>
+                            <td>Average Case</td>
+                            <td>Best Case</td>
+                        </tr>
+                        <tr>
+                            <td>Linear probing</td>
+                            <td>O(n)</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Chaining</td>
+                            <td>O(n)</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Double-Hashing</td>
+                            <td>O(n)</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h2>Load Balancing</h2>
+                    <p>If too many elements were hashed into the same key: looking inside this key may take O(n) time.</p>
+                    <p>Once a hash table has passed its load balance - it has to rehash (create a new bigger table, and re-insert each element to the table).</p>
+                    <p>In computing, load balancing refers to the process of distributing a set of activities over a set of resources (computing units), with the aim of making their overall processing more efficient.</p>
+                    <p>Load balancing can optimize response time and avoid unevenly overloading some compute nodes while other compute nodes remain idle.</p>
+                    <img src="./images/load-balancing.gif" alt="">
+                </div>
+                <div>
+                    <p>When open addressing is used as a collision resolution technique for a Hash Table implementation, N/M determines the load factor. N is the number of elements stored and M is the number of buckets available in the HashMap. 
+                    </p> 
+                    <p>
+                    The HashMap should be rehashed every time a load factor of the implementation is about to be reached. This helps in maintaining a balanced HashMap which keeps the search operation efficiency close to O(1). Generally, a load factor of 0.75 is defined to keep the HashMap balanced.</p>
+                </div>
+                <!-- TODO add a table? -->
             </details>
         </article>
         <!-- 1573625332.pdf -->
