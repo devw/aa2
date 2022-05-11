@@ -83,7 +83,7 @@ app.exec()
                             "You typed:" Don't forget the lineEdit.text() method to retrieve the text of a lineEdit...
                         </p>
                         <img class="w-500" src="./images/exercise-1.png" alt="" />
-                        <pre class="blur"><code class="python">
+                        <pre class=""><code class="python">
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QMessageBox, QPushButton, QLineEdit
 from PyQt5.QtCore import QCoreApplication
@@ -101,8 +101,8 @@ class Window(QMainWindow):
 
         self.button.clicked.connect(self.onClick)
 
-        self.layout.addWidget(self.lineEdit)   # Ici je met ma QLineEdit
-        self.layout.addWidget(self.button)   # Ici je met mon bouton
+        self.layout.addWidget(self.lineEdit)   
+        self.layout.addWidget(self.button)   
 
         self.widget = QWidget()
         self.widget.setLayout(self.layout)

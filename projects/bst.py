@@ -142,7 +142,6 @@ class TestGraphicalInterface(unittest.TestCase):
 
     def test_search_bst(self):
         tree = get_tree(['b', 'a', 'ab', 'd'])
-
         # test scenario 1
         self.assertIsNone(search_bst(tree, 'f'))
 
