@@ -90,7 +90,7 @@ h(ki) = ki mod m;
                 </div>
             </details>
         </article>
-        <article id="open-addressing">
+        <article id="closed-addressing">
             <details>
                 <summary>Open Hashing (Closed Addressing)</summary>
                 <div>
@@ -103,8 +103,6 @@ h(ki) = ki mod m;
                         The "close" in "closed addressing" tells us the index (aka. address) at which an object will be stored in the hash table is completely determined by its hash code. Indeed, the object's index does not vary regardless of what's already in the hash table.
                     </p>
                 </div>
-               
-
                 <div id="hashing-separate-chaining">
                     <h2>Chaining Method</h2>
                     <p>In open hashing, one of the methods used to resolve the collision is known as a chaining method.</p>
@@ -119,8 +117,8 @@ h(ki) = ki mod m;
                     <p class="info">The NIL value indicated above represents an empty value, it is a constant often used in Algorithms. In python it is designated as None</p>
                 </div>
                 <div>
-                    <h2>Example</h2>
-                    <img src="./images/chaining-method.png" alt="">
+                    <p>Here is an example of the chaining method</p>
+                    <img class="w-500" src="./images/chaining-method.png" alt="">
                 </div>
             </details>
         </article>
@@ -143,15 +141,15 @@ h(ki) = ki mod m;
                         The "closed" in "closed hashing" refers to the fact that we never leave the hash table; every object is stored directly at an index in the hash table's internal array. Note that this is only possible by using some sort of open addressing strategy. This explains why "closed hashing" and "open addressing" are synonyms.
                     </p>
                 </div>
-                <div>
-                    <h2>Handling Overflow with Linear Probing</h2>
+                <div id="linear-probing">
+                    <h2>Linear Probing</h2>
                     <img class="size-l" src="./images/ht/hash-open.addressing.gif" alt="" />
-                    <h2>Example</h2>
+                    <p>Here is an example of the linear probing method.</p>
                     <img class="size-l" src="./images/linear.probing.png" alt="" />
-                    <!-- TODO -->
+                    <!-- TODO quadritic probing?-->
                 </div>
-                <div>
-                    <h2>Handling Overflow with Re-Hashing (Double Hashing)</h2>
+                <div id="re-hashing">
+                    <h2>Re-Hashing (Double Hashing)</h2>
                     <img src="./images/overflow-area.gif" alt="">
                     <p>
                         Double Hashing is works on a similar idea to linear probing. Whenever a collision occurs, choose another spot in table to put the value.
@@ -163,9 +161,51 @@ h(ki) = ki mod m;
                         <li>check if hash1(key)+hash2(key) is open, if it is, put it in.</li>
                         <li>repeat with hash1(key)+2hash2(key), hash1(key)+3hash2(key) and so on, until an opening is found.</li>
                     </ul>
-                    <!-- TODO -->
+                    <!-- TODO Double Hashing-->
                 </div>
 
+            </details>
+            
+        </article>
+        <article>
+            <details>
+                <summary>Hybrid Solutions</summary>
+                <div>
+                    <h2>Coalesced Hashing</h2>
+                    <!-- coalizzato, Hachage Coalescent -->
+                    <p>The coalesced hashing method is a hybrid technique between the separate chaining method (open hashing) and an open addressing technique.</p>
+                    <p>Example of separate chaining (open hashing and closed addressing).</p>
+                    <img class="w-600" src="./images/separate-chaining-2.png" alt="">
+                    <p>When a collision occurs, the new element is placed in the largest index available.</p>
+                    <img class="w-600" src="./images/coalesced-hashing.png" alt="">
+                    <!-- https://www.youtube.com/watch?v=kj4Y5mFA2Qo -->
+                    <p></p>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Conclusions on hashing methods</summary>
+                <!-- TODO -->
+                <p>
+                    ## Conclusions sur les méthodes de hachage
+
+Toutes les méthodes de hachage sont bien adaptées aux ensembles statiques. Elles sont à peu près équivalentes pour un faible taux de remplissage.
+
+- **Le hachage coalescent** est la méthode la plus efficace si la zone de mémoire réservée au hachage doit être fixée à l’avance (zone de data statique).
+
+
+- **Le hachage linéaire** est le moins rapide, mais cette méthode présente l’avantage d’être extrêmement simple à mettre en oeuvre.
+
+
+- **Le double hachage** est plus performant que le hachage linéaire, mais il nécessite le calcul de deux fonctions de hachage (et donc leur écriture).
+
+
+- A part le chaînage séparé, les méthodes de hachage supportent assez mal les suppressions. La solution qui consiste à utiliser un système de marquage (vide, libre, occupée) augmente considérablement les temps de recherche.
+
+
+- **La plus performante** des méthodes de hachage est incontestablement celle avec **chaînage séparé**.
+                </p>
             </details>
         </article>
         <article>
