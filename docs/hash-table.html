@@ -177,7 +177,23 @@ h(ki) = ki mod m;
                     <p>Example of separate chaining (open hashing and closed addressing).</p>
                     <img class="w-600" src="./images/separate-chaining-2.png" alt="">
                     <p>When a collision occurs, the new element is placed in the largest index available.</p>
+                    <hr>
+                    <p>Here is the first example of the coalesced hashing method.</p>
                     <img class="w-600" src="./images/coalesced-hashing.png" alt="">
+                    <hr>
+                    <p>Here is the second example of the coalesced hashing method. The memory is organized in two parts, the primary area and the reserve area. </p>
+                    <img class="w-960" src="./images/coalesced-hashing-ex2.png" alt="">
+                    <br>
+                    <p>By adding the first four elements there are no collisions.</p>
+                    <img class="w-300" src="./images/coalesced-hashing-step-1.png" alt="">
+                    <p>The first collision (primary collision) occurs with the element x5.</p>
+                    <img class="w-500" src="./images/coalesced-hashing-step-2.png" alt="">
+                    <p>The x7 element is in collision with x1 which is in collision wiht x5.</p>
+                    <img class="w-500" src="./images/coalesced-hashing-step-3.png" alt="">
+                    <p>A secondary collision occurs with the x8 element. Indeed, the x5 element does not have the proper hash value to fill the 16th position.</p>
+                    <img class="w-500" src="./images/coalesced-hashing-step-4.png" alt="">
+                    <p>The final data structure will look like the below image.</p>
+                    <img class="w-400" src="./images/coalesced-hashing-step-5.png" alt="">
                     <!-- https://www.youtube.com/watch?v=kj4Y5mFA2Qo -->
                     <p></p>
                 </div>
@@ -186,26 +202,13 @@ h(ki) = ki mod m;
         <article>
             <details>
                 <summary>Conclusions on hashing methods</summary>
-                <!-- TODO -->
-                <p>
-                    ## Conclusions sur les méthodes de hachage
-
-Toutes les méthodes de hachage sont bien adaptées aux ensembles statiques. Elles sont à peu près équivalentes pour un faible taux de remplissage.
-
-- **Le hachage coalescent** est la méthode la plus efficace si la zone de mémoire réservée au hachage doit être fixée à l’avance (zone de data statique).
-
-
-- **Le hachage linéaire** est le moins rapide, mais cette méthode présente l’avantage d’être extrêmement simple à mettre en oeuvre.
-
-
-- **Le double hachage** est plus performant que le hachage linéaire, mais il nécessite le calcul de deux fonctions de hachage (et donc leur écriture).
-
-
-- A part le chaînage séparé, les méthodes de hachage supportent assez mal les suppressions. La solution qui consiste à utiliser un système de marquage (vide, libre, occupée) augmente considérablement les temps de recherche.
-
-
-- **La plus performante** des méthodes de hachage est incontestablement celle avec **chaînage séparé**.
-                </p>
+                <ul>
+                    <li><b>Coalescing hashing</b> is the most efficient method if the memory area reserved for hashing must be fixed in advance (static data area).</li>
+                    <li><b>Linear hashing</b> is the slowest, but this method has the advantage of being extremely simple to implement.</li>
+                    <li><b>Double hashing</b> is more efficient than linear hashing, but it requires the calculation of two hash functions (and therefore their implementation).</li>
+                    <li>Apart from separate chaining, hash methods do not support deletions quite well.</li>
+                    <li>The separate chaining is considered the most efficient when the memory area reserved for hashing cannot be planned in advance.</li>
+                </ul>
             </details>
         </article>
         <article>
