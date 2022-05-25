@@ -14,6 +14,7 @@
     <body>
         <!-- https://junminlee3.medium.com/hash-tables-animations-that-will-make-you-understand-how-they-work-d1bcc850ba71 -->
         <!-- /Users/antonio/Downloads/Lecture17.pdf -->
+        <h1><a href="./">Home</a></h1>
         <article id="introduction">
             <details>
                 <summary>The Map Data Structure</summary>
@@ -68,6 +69,13 @@ h(ki) = ki mod m;
                    <var> h(6) = 6 % 10 = 6</var>
                     <p>
                     The index is 6 at which the value is stored.</p>
+                    <div>
+                        <h4>Python Implementation</h4>
+                        <pre><code class="python">
+def hash_word(word, tablesize):
+    return sum(ord(char) for char in word) % tablesize
+                        </code></pre>
+                    </div>
             </details>
         </article>
         <article id="hash-collision">
