@@ -81,7 +81,6 @@ def hash_word(word, tablesize):
         <article>
             <details>
                 <summary>Hash standard technique</summary>
-                <div>
                     <h2>Division hashing</h2>
                     <p>Division hashing method uses a modulo function on the key, by selecting a divisor M, the table size.</p>
                     <!-- <img class="w-500" src="./images/division.png" alt=""> -->
@@ -95,16 +94,17 @@ def hash(word):
                     </code></pre>
                     <!-- <h3>Exercise</h3>
                     <p>Write a python function to obtain the same result of the data shown in the table above </p>
-                </div>
+                </div>-->
                 <div>
                     <h2>Extracting (Extration)</h2>
-                    <p>The Extracting method extracts an appropriate number of bits and combines them to obtain a new decimal number.</p>
+                    <p>The extracting method extracts an appropriate number of bits and combines them to obtain a new decimal number.</p>
                     <img class="w-500" src="./images/extract-bits.png" alt="">
                     <p>By extracting n bits will have a hash function which output is an integer number ranging between 0 and 2^(n-1)</p>
                     <p>Let's suppose to extract bits 2, 7, 12 and 17.
                         The result is shown in the following figure.</p>
                     <img class="w-500" src="./images/extr-bits.png" alt="">
-                </div> -->
+                    <p>Write a python function to obtain the result shown in the above image.</p>
+                </div> 
                 <div>
                     <h2>Folding (Compression)</h2>
                     <img class="w-500" src="./images/compression.png" alt="">
