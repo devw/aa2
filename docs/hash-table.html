@@ -78,6 +78,78 @@ def hash_word(word, tablesize):
                     </div>
             </details>
         </article>
+        <article>
+            <details>
+                <summary>Hash standard technique</summary>
+                <div>
+                    <h2>Division hashing</h2>
+                    <p>Division hashing method uses a modulo function on the key, by selecting a divisor M, the table size.</p>
+                    <!-- <img class="w-500" src="./images/division.png" alt=""> -->
+                    <pre ><code class="python">
+def hash(word):
+    sum = 0
+    table_size = 10
+    for char in word:
+        sum += ord(char)
+    return sum % table_size
+                    </code></pre>
+                    <!-- <h3>Exercise</h3>
+                    <p>Write a python function to obtain the same result of the data shown in the table above </p>
+                </div>
+                <div>
+                    <h2>Extracting (Extration)</h2>
+                    <p>The Extracting method extracts an appropriate number of bits and combines them to obtain a new decimal number.</p>
+                    <img class="w-500" src="./images/extract-bits.png" alt="">
+                    <p>By extracting n bits will have a hash function which output is an integer number ranging between 0 and 2^(n-1)</p>
+                    <p>Let's suppose to extract bits 2, 7, 12 and 17.
+                        The result is shown in the following figure.</p>
+                    <img class="w-500" src="./images/extr-bits.png" alt="">
+                </div> -->
+                <div>
+                    <h2>Folding (Compression)</h2>
+                    <img class="w-500" src="./images/compression.png" alt="">
+                    <p>Write a python function to obtain the result shown in the above image</p>
+                    <pre class="blur"><code class="python">
+def hash(word):
+    res = 0
+    for char in word:
+        num = ord(char) - ord("A") + 1
+        res = res ^ num
+    return res
+
+res = hash("CARO")
+print(res)
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Multiplicative hashing</h2>
+                    <p>
+                        h(e) = [ (( x * &#x3D1; ) mod 1 ) * m]
+
+                    </p>
+                    <ul>
+                        <li>e is the starting key (binary number/decimal number)</li>
+                        <li>&#x3D1; is a real number (0 < &#x3D1; < 1)</li>
+                        <li>m is the table size </li>
+                        <li>the module is used to extract the decimal part.</li>
+                    </ul>
+                    <p>Here is the result by setting  &#x3D1; = 0.5987526325$ and  m = 27:</p>
+                    <img class="w-500" src="./images/hash-mult.png" alt="">
+                    <p>Write a python function to obtain the result shown in the above image</p>
+                    <pre class="blur"><code class="python">
+def hash(word):
+    res = 0
+    for char in word:
+        num = ord(char) - ord("A") + 1
+        res = res ^ num
+    return res
+
+res = hash("CARO")
+print(res)
+                    </code></pre>
+                </div>
+            </details>
+        </article>
         <article id="hash-collision">
             <details>
                 <summary>Problem with Hashing</summary>
@@ -156,12 +228,25 @@ def hash_word(word, tablesize):
                     <img class="size-l" src="./images/linear.probing.png" alt="" />
                     <!-- TODO quadritic probing?-->
                 </div>
+                <div>
+                    <h2>Quadratic Probing</h2>
+                    <p>Quadratic probing can be a more efficient algorithm in an open addressing table, since it better avoids the clustering problem that can occur with linear probing.</p>
+                    <div>
+                        <h3>Implementation</h3>
+                        <p>
+                            Suppose 'h' is a hash function.
+                            The different attempts are defined with the function try<sub>i</sub> 
+                        </p>
+                        <p>tri<sub>i</sub> = h(x) &oplus; c1 * (i - 1) &oplus; c2 * (i - 1)^2 </p>
+                        <p>c1 = 1, c2 = 2</p>
+                    </div>
+                </div>
                 <div id="re-hashing">
                     <h2>Re-Hashing (Double Hashing)</h2>
                     <img src="./images/overflow-area.gif" alt="">
                     <p>
-                        Double Hashing is works on a similar idea to linear probing. Whenever a collision occurs, choose another spot in table to put the value.
-                        The difference here is that instead of choosing next opening, a second hash function is used to determine the location of the next spot. For example, given hash function H1 and H2 and key. do the following:
+                        Double Hashing works on a similar idea to linear probing. Whenever a collision occurs, choose another spot in table to put the value.
+                        The difference here is that instead of choosing next free spot, a second hash function is used to determine the location of the next spot. For example, given hash function H1 and H2 and key. do the following:
                     </p>
                     <ul>
                         <li>Check location hash1(key). If it is empty, put record in it.</li>
@@ -170,6 +255,16 @@ def hash_word(word, tablesize):
                         <li>repeat with hash1(key)+2hash2(key), hash1(key)+3hash2(key) and so on, until an opening is found.</li>
                     </ul>
                     <!-- TODO Double Hashing-->
+                </div>
+                <div>
+                    <h3>Implementation</h3>
+                    <p>
+                        Suppose 'h' is a hash function.
+                        The different attempts are defined with the function try<sub>i</sub> 
+                    </p>
+                    <p>try<sub>i</sub> = h(x) &oplus; d(x) * i </p>
+                    <p>d(x) = h(x)  &oplus; 1</p>
+                    <p>i &isin; {0, ..., m - 1}, (m the table size)</p>
                 </div>
 
             </details>
@@ -267,6 +362,56 @@ def hash_word(word, tablesize):
                     The HashMap should be rehashed every time a load factor of the implementation is about to be reached. This helps in maintaining a balanced HashMap which keeps the search operation efficiency close to O(1). Generally, a load factor of 0.75 is defined to keep the HashMap balanced.</p>
                 </div>
                 <!-- TODO add a table? -->
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Exercises</summary>
+                <div>
+                    <h2>Exercise 1</h2>
+                    <p>The following hash function produces a hash collision every time there are two words that are anagrams (state, taste). Try to fix the hash function in order to not have a hash collision with two words that are anagrams.  </p>
+                    <pre><code class="python">
+hash = lambda x: sum(ord(char) for char in x) % 1000
+print(hash("state")==hash("taste")) ### -> True
+                    </code></pre>
+                    <p>Here is a possible solution for avoiding the hash collision for words that are anagrams.</p>
+                    <pre class="blur"><code class="python">
+hash = lambda x: sum(ord(char) * i for i, char in enumerate(x)) % 1000
+print(hash("state")==hash("taste")) ### -> False
+                    </code></pre>
+                </div>
+                <div>
+                <h2>Exercise 2</h2>
+                <p>You have a list o words (vocabulary). Given a word, you have to find all other words in the vocabulary that are an anagram of the given word. 
+                </p>
+                <p>The time complexity for searching an anagram should be O(1)</p>
+                <p>Example</p>
+                <pre><code class="python">
+vocabulary = ['study', 'bored', 'hint', 'car']
+
+input = 'dusty'
+output = 'study'
+
+input = 'thin'
+output = 'hint'
+
+input = 'stuff'
+output = False
+                </code></pre>
+                <p>Here is a possible solution for searching an anagram in a vocabulary with a time complexity O(1).</p>
+                <pre class="blur"><code class="python">
+vocabulary = ['study', 'bored', 'night', 'car', 'below']
+hash = lambda x: sum(ord(char) for char in x) % 1000
+hash_table = {hash(word): word for word in vocabulary}
+
+# use case 1
+hash('dusty') in hash_table and print(hash_table[hash('dusty')])  
+
+# use case 3
+hash('stuff') in hash_table and print(hash_table[hash('stuff')])  
+                </code></pre>
+                </div>
+
             </details>
         </article>
         <!-- 1573625332.pdf -->
