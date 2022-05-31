@@ -226,6 +226,17 @@ print(res)
                     <img class="size-l" src="./images/ht/hash-open.addressing.gif" alt="" />
                     <p>Here is an example of the linear probing method.</p>
                     <img class="size-l" src="./images/linear.probing.png" alt="" />
+                    <h3>Implementation</h3>
+                    <p>The different attempts via the linear probing method are defined with the function try<sub>i</sub></p>
+                    <ul>
+                        <li>try<sub>1</sub>(h) = h(x) </li>
+                        <li>try<sub>2</sub>(h) = h(x)  &oplus; 1   which is equal to  h(x) + 1 mod m</li>
+                        <li>...</li>
+                        <li>try<sub>i</sub>(h) = h(x)  &oplus; (i - 1) which is equal to h(x) + (i -1 ) mod m</li>
+                    </ul>
+                    <p>
+                        The symbol a &oplus; b indicates a + b mod m where m is the hash table size.
+                       </p>
                     <!-- TODO quadritic probing?-->
                 </div>
                 <div>
@@ -238,7 +249,8 @@ print(res)
                             The different attempts are defined with the function try<sub>i</sub> 
                         </p>
                         <p>tri<sub>i</sub> = h(x) &oplus; c1 * (i - 1) &oplus; c2 * (i - 1)^2 </p>
-                        <p>c1 = 1, c2 = 2</p>
+                        <p>i &#8712; {0, 1, ..., m} where m is the hash table size.</p>
+                        <p>c1 and c2 are constant.</p>
                     </div>
                 </div>
                 <div id="re-hashing">
@@ -260,9 +272,9 @@ print(res)
                     <h3>Implementation</h3>
                     <p>
                         Suppose 'h' is a hash function.
-                        The different attempts are defined with the function try<sub>i</sub> 
+                        The different attempts via the quadratic probing method are defined with the function try<sub>i</sub> 
                     </p>
-                    <p>try<sub>i</sub> = h(x) &oplus; d(x) * i </p>
+                    <p>try<sub>i</sub> = h(x) &oplus; d(x) * (i - 1) </p>
                     <p>d(x) = h(x)  &oplus; 1</p>
                     <p>i &isin; {0, ..., m - 1}, (m the table size)</p>
                 </div>
