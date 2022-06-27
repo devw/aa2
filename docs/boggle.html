@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project 1</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <h1><a href="./">Home</a></h1>
+        <article id="introduction">
+            <details>
+                <summary>Boggle</summary>
+                <!-- TODO last project Boggle-->
+                <h2>Introduction</h2>
+                <p>
+                    The Boggle game is played using a plastic grid of lettered dice, in which players look for words in
+                    sequences of adjacent letters.
+                </p>
+                <img src="./images/boggle.jpeg" alt="" />
+                <p>
+                    The game begins by shaking a covered tray of 16 cubic dice, each with a different letter printed on
+                    each of its sides. The dice settle into a 4 x 4 tray so that only the top letter of each cube is
+                    visible.
+                </p>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Lettered Dice Grid</summary>
+                <p>Write a program to reproduce the grid of Boggle cubes.</p>
+                <img src="./images/lettered-dice-grid.png" alt="" />
+                <p>This is the dice configuration for the English Boggle:</p>
+                <pre><code class="python">
+AAEEGN
+ABBJOO
+ACHOPS
+AFFKPS
+AOOTTW
+CIMOTU
+DEILRX
+DELRVY
+DISTTY
+EEGHNW
+EEINSU
+EHRTVW
+EIOSST
+ELRTTY
+HIMNUQu
+HLNNRZ
+                </code></pre>
+                <p>Here is some piece of code to implement the Dice Grid</p>
+                <pre><code class="python">
+# Randomize (shuffle) a python array
+from random import shuffle
+dice = ['AAEEGN', 'ABBJOO', 'ACHOPS', '...']
+shuffle(dice)
+print(dice)
+
+# Simulate a dice roll 
+from random import choice
+letter = choice('AAEEGN')
+print(letter)
+
+
+</code></pre>
+                <pre class="blur"><code class="python">
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QLabel
+from PyQt5.QtCore import QCoreApplication
+from random import choice, shuffle
+
+
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.dice = self.get_dice()
+        self.draw_grid()
+
+    def get_label(self, letter):
+        self.letter = QLabel(letter)
+        self.letter.setStyleSheet("border: 2px solid rgb(220,220,220);"
+                                    "background-color: rgb(200,200,200);"
+                                    "border-radius: 10px;"
+                                    "qproperty-alignment: AlignCenter;"
+                                    "font-size: 20px;"
+                                    "qproperty-wordWrap: true;")
+        return self.letter
+
+    def draw_grid(self):
+        self.layout = QGridLayout()
+        for (x, y) in [(i, j) for i in range(4) for j in range(4)]:
+            label = self.get_label(self.get_random_letter(self.dice.pop()))
+            self.layout.addWidget(label, x, y)
+        self.widget = QWidget()
+        self.widget.setLayout(self.layout)
+        self.setCentralWidget(self.widget)
+
+    def get_random_letter(self, letters):
+        letter = choice(letters)
+        return letter if letter != 'Q' else 'Qu'
+
+    def get_dice(self):
+        dice = [
+            'AAEEGN',
+            'ABBJOO',
+            'ACHOPS',
+            'AFFKPS',
+            'AOOTTW',
+            'CIMOTU',
+            'DEILRX',
+            'DELRVY',
+            'DISTTY',
+            'EEGHNW',
+            'EEINSU',
+            'EHRTVW',
+            'EIOSST',
+            'ELRTTY',
+            'HIMNUQ',
+            'HLNNRZ']
+        shuffle(dice)
+        return dice
+
+
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+window = Window()
+window.show()
+app.exec()
+                    
+                </code></pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Check words criteria</summary>
+                <p>Write a function to check the player searches. The criteria are the following:</p>
+                <ul>
+                    <li>Words must be at least three letters in length.</li>
+                    <li>No individual letter cube may be used more than once in a word.</li>
+                    <li>Each letter must be a horizontal, vertical, or diagonal neighbour of the one before it.</li>
+                </ul>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Hash Function</summary>
+                <p>Write a hash function for English words</p>
+                <p>To write a hash function in python you can use the ord() function.</p>
+                <p>
+                    The ord() function in Python converts a character into its Unicode code value. This function accepts
+                    a single character.
+                </p>
+                <p>The chr() function returns the character that represents the specified unicode.</p>
+                <p>Unicode is an International character encoding standard.</p>
+                <p>Each letter, digit or symbol has its own unique Unicode value.</p>
+                <img src="./images/ascii.jpeg" alt="" />
+                <pre><code class="python">
+def hash_word(word, tablesize):
+    return sum(ord(char) - ord('a') for char in word.lower()) % tablesize
+                </code></pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Collision Resolution</summary>
+                <p>
+                    When two items hash to the same slot, we must have a systematic method for placing the second item
+                    in the hash table. This process is called collision resolution.
+                </p>
+                <p>
+                    If the hash function is perfect, collisions will never occur. However, since this is often not
+                    possible, collision resolution becomes a very important part of hashing.
+                </p>
+                <p>Write a python program to handle the collision resolution.</p>
+                <!-- TODO see https://stephenagrice.medium.com/how-to-implement-a-hash-table-in-python-1eb6c55019fd -->
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+

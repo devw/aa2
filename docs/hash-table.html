@@ -14,6 +14,7 @@
     <body>
         <!-- https://junminlee3.medium.com/hash-tables-animations-that-will-make-you-understand-how-they-work-d1bcc850ba71 -->
         <!-- /Users/antonio/Downloads/Lecture17.pdf -->
+        <h1><a href="./">Home</a></h1>
         <article id="introduction">
             <details>
                 <summary>The Map Data Structure</summary>
@@ -68,6 +69,85 @@ h(ki) = ki mod m;
                    <var> h(6) = 6 % 10 = 6</var>
                     <p>
                     The index is 6 at which the value is stored.</p>
+                    <div>
+                        <h4>Python Implementation</h4>
+                        <pre><code class="python">
+def hash_word(word, tablesize):
+    return sum(ord(char) for char in word) % tablesize
+                        </code></pre>
+                    </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Hash standard technique</summary>
+                    <h2>Division hashing</h2>
+                    <p>Division hashing method uses a modulo function on the key, by selecting a divisor M, the table size.</p>
+                    <!-- <img class="w-500" src="./images/division.png" alt=""> -->
+                    <pre ><code class="python">
+def hash(word):
+    sum = 0
+    table_size = 10
+    for char in word:
+        sum += ord(char)
+    return sum % table_size
+                    </code></pre>
+                    <!-- <h3>Exercise</h3>
+                    <p>Write a python function to obtain the same result of the data shown in the table above </p>
+                </div>-->
+                <div>
+                    <h2>Extracting (Extration)</h2>
+                    <p>The extracting method extracts an appropriate number of bits and combines them to obtain a new decimal number.</p>
+                    <img class="w-500" src="./images/extract-bits.png" alt="">
+                    <p>By extracting n bits will have a hash function which output is an integer number ranging between 0 and 2^(n-1)</p>
+                    <p>Let's suppose to extract bits 2, 7, 12 and 17.
+                        The result is shown in the following figure.</p>
+                    <img class="w-500" src="./images/extr-bits.png" alt="">
+                    <p>Write a python function to obtain the result shown in the above image.</p>
+                </div> 
+                <div>
+                    <h2>Folding (Compression)</h2>
+                    <img class="w-500" src="./images/compression.png" alt="">
+                    <p>Write a python function to obtain the result shown in the above image</p>
+                    <pre class="blur"><code class="python">
+def hash(word):
+    res = 0
+    for char in word:
+        num = ord(char) - ord("A") + 1
+        res = res ^ num
+    return res
+
+res = hash("CARO")
+print(res)
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Multiplicative hashing</h2>
+                    <p>
+                        h(e) = [ (( x * &#x3D1; ) mod 1 ) * m]
+
+                    </p>
+                    <ul>
+                        <li>e is the starting key (binary number/decimal number)</li>
+                        <li>&#x3D1; is a real number (0 < &#x3D1; < 1)</li>
+                        <li>m is the table size </li>
+                        <li>the module is used to extract the decimal part.</li>
+                    </ul>
+                    <p>Here is the result by setting  &#x3D1; = 0.5987526325$ and  m = 27:</p>
+                    <img class="w-500" src="./images/hash-mult.png" alt="">
+                    <p>Write a python function to obtain the result shown in the above image</p>
+                    <pre class="blur"><code class="python">
+def hash(word):
+    res = 0
+    for char in word:
+        num = ord(char) - ord("A") + 1
+        res = res ^ num
+    return res
+
+res = hash("CARO")
+print(res)
+                    </code></pre>
+                </div>
             </details>
         </article>
         <article id="hash-collision">
@@ -90,7 +170,7 @@ h(ki) = ki mod m;
                 </div>
             </details>
         </article>
-        <article id="open-addressing">
+        <article id="closed-addressing">
             <details>
                 <summary>Open Hashing (Closed Addressing)</summary>
                 <div>
@@ -103,8 +183,6 @@ h(ki) = ki mod m;
                         The "close" in "closed addressing" tells us the index (aka. address) at which an object will be stored in the hash table is completely determined by its hash code. Indeed, the object's index does not vary regardless of what's already in the hash table.
                     </p>
                 </div>
-               
-
                 <div id="hashing-separate-chaining">
                     <h2>Chaining Method</h2>
                     <p>In open hashing, one of the methods used to resolve the collision is known as a chaining method.</p>
@@ -119,8 +197,8 @@ h(ki) = ki mod m;
                     <p class="info">The NIL value indicated above represents an empty value, it is a constant often used in Algorithms. In python it is designated as None</p>
                 </div>
                 <div>
-                    <h2>Example</h2>
-                    <img src="./images/chaining-method.png" alt="">
+                    <p>Here is an example of the chaining method</p>
+                    <img class="w-500" src="./images/chaining-method.png" alt="">
                 </div>
             </details>
         </article>
@@ -143,19 +221,44 @@ h(ki) = ki mod m;
                         The "closed" in "closed hashing" refers to the fact that we never leave the hash table; every object is stored directly at an index in the hash table's internal array. Note that this is only possible by using some sort of open addressing strategy. This explains why "closed hashing" and "open addressing" are synonyms.
                     </p>
                 </div>
-                <div>
-                    <h2>Handling Overflow with Linear Probing</h2>
+                <div id="linear-probing">
+                    <h2>Linear Probing</h2>
                     <img class="size-l" src="./images/ht/hash-open.addressing.gif" alt="" />
-                    <h2>Example</h2>
+                    <p>Here is an example of the linear probing method.</p>
                     <img class="size-l" src="./images/linear.probing.png" alt="" />
-                    <!-- TODO -->
+                    <h3>Implementation</h3>
+                    <p>The different attempts via the linear probing method are defined with the function try<sub>i</sub></p>
+                    <ul>
+                        <li>try<sub>1</sub>(h) = h(x) </li>
+                        <li>try<sub>2</sub>(h) = h(x)  &oplus; 1   which is equal to  h(x) + 1 mod m</li>
+                        <li>...</li>
+                        <li>try<sub>i</sub>(h) = h(x)  &oplus; (i - 1) which is equal to h(x) + (i -1 ) mod m</li>
+                    </ul>
+                    <p>
+                        The symbol a &oplus; b indicates a + b mod m where m is the hash table size.
+                       </p>
+                    <!-- TODO quadritic probing?-->
                 </div>
                 <div>
-                    <h2>Handling Overflow with Re-Hashing (Double Hashing)</h2>
+                    <h2>Quadratic Probing</h2>
+                    <p>Quadratic probing can be a more efficient algorithm in an open addressing table, since it better avoids the clustering problem that can occur with linear probing.</p>
+                    <div>
+                        <h3>Implementation</h3>
+                        <p>
+                            Suppose 'h' is a hash function.
+                            The different attempts are defined with the function try<sub>i</sub> 
+                        </p>
+                        <p>tri<sub>i</sub> = h(x) &oplus; c1 * (i - 1) &oplus; c2 * (i - 1)^2 </p>
+                        <p>i &#8712; {0, 1, ..., m} where m is the hash table size.</p>
+                        <p>c1 and c2 are constant.</p>
+                    </div>
+                </div>
+                <div id="re-hashing">
+                    <h2>Re-Hashing (Double Hashing)</h2>
                     <img src="./images/overflow-area.gif" alt="">
                     <p>
-                        Double Hashing is works on a similar idea to linear probing. Whenever a collision occurs, choose another spot in table to put the value.
-                        The difference here is that instead of choosing next opening, a second hash function is used to determine the location of the next spot. For example, given hash function H1 and H2 and key. do the following:
+                        Double Hashing works on a similar idea to linear probing. Whenever a collision occurs, choose another spot in table to put the value.
+                        The difference here is that instead of choosing next free spot, a second hash function is used to determine the location of the next spot. For example, given hash function H1 and H2 and key. do the following:
                     </p>
                     <ul>
                         <li>Check location hash1(key). If it is empty, put record in it.</li>
@@ -163,9 +266,64 @@ h(ki) = ki mod m;
                         <li>check if hash1(key)+hash2(key) is open, if it is, put it in.</li>
                         <li>repeat with hash1(key)+2hash2(key), hash1(key)+3hash2(key) and so on, until an opening is found.</li>
                     </ul>
-                    <!-- TODO -->
+                    <!-- TODO Double Hashing-->
+                </div>
+                <div>
+                    <h3>Implementation</h3>
+                    <p>
+                        Suppose 'h' is a hash function.
+                        The different attempts via the double hashing method are defined with the function try<sub>i</sub> 
+                    </p>
+                    <p>try<sub>i</sub> = h(x) &oplus; d(x) * (i - 1) </p>
+                    <p>d(x) = h(x)  &oplus; 1</p>
+                    <p>i &isin; {0, ..., m - 1}, (m the table size)</p>
                 </div>
 
+            </details>
+            
+        </article>
+        <article>
+            <details>
+                <summary>Hybrid Solutions</summary>
+                <div>
+                    <h2>Coalesced Hashing</h2>
+                    <!-- coalizzato, Hachage Coalescent -->
+                    <p>The coalesced hashing method is a hybrid technique between the separate chaining method (open hashing) and an open addressing technique.</p>
+                    <p>Example of separate chaining (open hashing and closed addressing).</p>
+                    <img class="w-600" src="./images/separate-chaining-2.png" alt="">
+                    <p>When a collision occurs, the new element is placed in the largest index available.</p>
+                    <hr>
+                    <p>Here is the first example of the coalesced hashing method.</p>
+                    <img class="w-600" src="./images/coalesced-hashing.png" alt="">
+                    <hr>
+                    <p>Here is the second example of the coalesced hashing method. The memory is organized in two parts, the primary area and the reserve area. </p>
+                    <img class="w-960" src="./images/coalesced-hashing-ex2.png" alt="">
+                    <br>
+                    <p>By adding the first four elements there are no collisions.</p>
+                    <img class="w-300" src="./images/coalesced-hashing-step-1.png" alt="">
+                    <p>The first collision (primary collision) occurs with the element x5.</p>
+                    <img class="w-500" src="./images/coalesced-hashing-step-2.png" alt="">
+                    <p>The x7 element is in collision with x1 which is in collision wiht x5.</p>
+                    <img class="w-500" src="./images/coalesced-hashing-step-3.png" alt="">
+                    <p>A secondary collision occurs with the x8 element. Indeed, the x5 element does not have the proper hash value to fill the 16th position.</p>
+                    <img class="w-500" src="./images/coalesced-hashing-step-4.png" alt="">
+                    <p>The final data structure will look like the below image.</p>
+                    <img class="w-400" src="./images/coalesced-hashing-step-5.png" alt="">
+                    <!-- https://www.youtube.com/watch?v=kj4Y5mFA2Qo -->
+                    <p></p>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Conclusions on hashing methods</summary>
+                <ul>
+                    <li><b>Coalescing hashing</b> is the most efficient method if the memory area reserved for hashing must be fixed in advance (static data area).</li>
+                    <li><b>Linear hashing</b> is the slowest, but this method has the advantage of being extremely simple to implement.</li>
+                    <li><b>Double hashing</b> is more efficient than linear hashing, but it requires the calculation of two hash functions (and therefore their implementation).</li>
+                    <li>Apart from separate chaining, hash methods do not support deletions quite well.</li>
+                    <li>The separate chaining is considered the most efficient when the memory area reserved for hashing cannot be planned in advance.</li>
+                </ul>
             </details>
         </article>
         <article>
@@ -216,6 +374,56 @@ h(ki) = ki mod m;
                     The HashMap should be rehashed every time a load factor of the implementation is about to be reached. This helps in maintaining a balanced HashMap which keeps the search operation efficiency close to O(1). Generally, a load factor of 0.75 is defined to keep the HashMap balanced.</p>
                 </div>
                 <!-- TODO add a table? -->
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Exercises</summary>
+                <div>
+                    <h2>Exercise 1</h2>
+                    <p>The following hash function produces a hash collision every time there are two words that are anagrams (state, taste). Try to fix the hash function in order to not have a hash collision with two words that are anagrams.  </p>
+                    <pre><code class="python">
+hash = lambda x: sum(ord(char) for char in x) % 1000
+print(hash("state")==hash("taste")) ### -> True
+                    </code></pre>
+                    <p>Here is a possible solution for avoiding the hash collision for words that are anagrams.</p>
+                    <pre class="blur"><code class="python">
+hash = lambda x: sum(ord(char) * i for i, char in enumerate(x)) % 1000
+print(hash("state")==hash("taste")) ### -> False
+                    </code></pre>
+                </div>
+                <div>
+                <h2>Exercise 2</h2>
+                <p>You have a list o words (vocabulary). Given a word, you have to find all other words in the vocabulary that are an anagram of the given word. 
+                </p>
+                <p>The time complexity for searching an anagram should be O(1)</p>
+                <p>Example</p>
+                <pre><code class="python">
+vocabulary = ['study', 'bored', 'hint', 'car']
+
+input = 'dusty'
+output = 'study'
+
+input = 'thin'
+output = 'hint'
+
+input = 'stuff'
+output = False
+                </code></pre>
+                <p>Here is a possible solution for searching an anagram in a vocabulary with a time complexity O(1).</p>
+                <pre class="blur"><code class="python">
+vocabulary = ['study', 'bored', 'night', 'car', 'below']
+hash = lambda x: sum(ord(char) for char in x) % 1000
+hash_table = {hash(word): word for word in vocabulary}
+
+# use case 1
+hash('dusty') in hash_table and print(hash_table[hash('dusty')])  
+
+# use case 3
+hash('stuff') in hash_table and print(hash_table[hash('stuff')])  
+                </code></pre>
+                </div>
+
             </details>
         </article>
         <!-- 1573625332.pdf -->

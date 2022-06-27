@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>General Trees</title>
+        <title>Tree data structure</title>
         <link rel="stylesheet" href="./main.css" />
         <link rel="stylesheet" href="./collapse.css" />
         <script src="vendors/highlight.min.js"></script>
@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="vendors/highlight.min.css" />
     </head>
     <body>
+        <h1><a href="./">Home</a></h1>
         <article id="introduction">
             <details>
                 <summary>Trees Definition</summary>
@@ -126,13 +127,13 @@
                         The size of a tree is its number of nodes (leaves or not). Example: The following tree is of
                         size 6.
                     </p>
-                    <pre>
+                    <pre><code class="python">
 #         R
 #       / | \
 #     A   B  C
 #    / \
 #   D   E
-                    </pre>
+</code> </pre>
                 </div>
             </details>
         </article>
@@ -166,27 +167,23 @@
                     </p>
                     <img src="./images/tree-as-list.jpg" alt="" />
                 </div>
-            </details>
-        </article>
-        <article>
-            <details>
-                <summary>Root implementation</summary>
                 <div>
-                    <h2>Implement a Tree via a Python List</h2>
+                    <h2>Tree implementation in Python using list (example 1)</h2>
+                    <p>Implement a tree data structure via a list where the second item represents a subtree.</p>
                     <pre><code class="python">
 # tree = (root, list of subtrees)
 
 #an empty tree
-tree=[]
+tree = []
 
 # a tree with a single root node
-tree=["R",[]]
+tree=[ "R" , [] ]
 
 # a tree with 3 children
 #         R
 #       / | \
 #     A   B  C
-tree=["R",[["A",[]],["B",[]],["C",[]]]]
+tree=["R", [ ["A", [] ] , ["B", [ ] ] , [ "C", [ ] ] ] ]
 
 # a tree of height 2
 #         R
@@ -194,7 +191,7 @@ tree=["R",[["A",[]],["B",[]],["C",[]]]]
 #     A   B  C
 #    / \
 #   D   E
-tree = ["R",[["A",[["D",[]],["E",[]]]],["B",[]],["C",[]]]]
+tree = ["R", [ ["A", [ ["D", [] ], ["E", [] ]] ], ["B",[] ], ["C", []] ] ]
 
 # i.e. 4 trees of height 0 with roots B, C, D and E:
 treeB=["B",[]]
@@ -202,10 +199,10 @@ treeC=["C",[]]
 treeD=["D",[]]
 treeE=["E",[]]
 # a tree of height 1 with root A composed of the two subtrees D and E
-treeA=["A",[treeD,treeE]]
+treeA=["A",[treeD , treeE]]
 
 # the previous tree with root R is thus given by
-tree=["R",[treeA,treeB,treeC]]
+tree=["R",[treeA, treeB, treeC]]
 </code>
                     </pre>
                 </div>
@@ -311,6 +308,50 @@ lf=[]
 print("nombre de feuilles :",feuilles(tree,lf))
 print(lf)
                     </pre>
+                </div>
+
+                <div>
+                    <h2>Tree implementation in Python using list (example 2)</h2>
+                    <p>
+                        Implement a tree data structure via a list where the second item represents the pointers to the
+                        children nodes.
+                    </p>
+                    <pre><code class="python">
+# a tree of height 2
+#         R
+#       / | \
+#     A   B  C
+#    / \
+#   D   E
+tree = [["R", (1, 2, 3)], ["A", (4, 5)], ["B", ()], ["C", ()], ["D", ()], ["E", ()] ]
+
+# i.e. 4 trees of height 0 with roots B, C, D and E:
+treeB=["B",[]]
+treeC=["C",[]]
+treeD=["D",[]]
+treeE=["E",[]]
+# a tree of height 1 with root A composed of the two subtrees D and E
+treeA=["A",[treeD , treeE]]
+
+# the previous tree with root R is thus given by
+tree=["R",[treeA, treeB, treeC]]
+</code>
+                    </pre>
+                </div>
+                <div>
+                    <h2>Tree implementation in Python using list (example 3)</h2>
+                    <pre><code class="python">
+# a tree of height 3
+#         1
+#       / | \
+#     3   2  4
+#    / \
+#   6   5
+#  /
+# 7
+tree = [["1", [1, 2, 3]], ["3", [4, 5]], ["2", []], ["4", []], ["6", [6]], ["5", []], ["7", []] ]
+
+                    </code></pre>
                 </div>
                 <div id="create-tree">
                     <h2>Python program to create a tree</h2>
