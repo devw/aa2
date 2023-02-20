@@ -1,27 +1,71 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
-from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout
+from PyQt6.QtGui import QPalette, QColor
 
-class Window(QMainWindow):
-  def __init__(self):
-    super().__init__()
-    self.setWindowTitle("Button title")
-    self.button = QPushButton('Click me!')
-    self.button.clicked.connect(self.onClick)
-    self.setCentralWidget(self.button)
 
-  def onClick(self):
-    print("clic!")
+class Color(QWidget):
 
-app = QCoreApplication.instance()
-if app is None:
-  app = QApplication(sys.argv)
-window = Window()
+    def __init__(self, color):
+        super(Color, self).__init__()
+        self.setAutoFillBackground(True)
+        palette = self.palette()
+        palette.setColor(QPalette.ColorRole.Window, QColor(color))
+        self.setPalette(palette)
+
+
+class MainWindow(QMainWindow):
+
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle("My App")
+
+        layout = QGridLayout()
+
+        for x in range(10):
+            for y in range(10):
+                if (x + y) % 2 == 0:
+                    layout.addWidget(Color('white'), x, y)
+                else:
+                    layout.addWidget(Color('black'), x, y)
+
+        layout.setSpacing(0)
+
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
+
+
+app = QApplication([])
+window = MainWindow()
 window.show()
-app.exec_()
+app.exec()
 
 
-# #### color 
+# from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
+# from PyQt6.QtCore import QCoreApplication
+
+
+# class Window(QMainWindow):
+#     def __init__(self):
+#         super().__init__()
+#         self.setWindowTitle("Button title")
+#         self.button = QPushButton('Click me!')
+#         self.button.clicked.connect(self.onClick)
+#         self.setCentralWidget(self.button)
+
+#     def onClick(self):
+#         print("clic!")
+
+
+# app = QCoreApplication.instance()
+# if app is None:
+#     app = QApplication([])
+# window = Window()
+# window.show()
+# app.exec()
+
+
+# #### color
 
 # # import sys
 # # from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout
@@ -30,10 +74,10 @@ app.exec_()
 # # class Color(QWidget):
 # #   def __init__(self, color):
 # #     super().__init__()
-# #     self.setAutoFillBackground(True) 
-# #     self.myPalette = self.palette() 
+# #     self.setAutoFillBackground(True)
+# #     self.myPalette = self.palette()
 # #     self.myPalette.setColor(QPalette.Window, QColor(color))
-# #     self.setPalette(self.myPalette) 
+# #     self.setPalette(self.myPalette)
 
 # # class Window(QMainWindow):
 # #   def __init__(self):
@@ -53,7 +97,7 @@ app.exec_()
 # # window.show()
 # # app.exec_()
 
-# import sys 
+# import sys
 # from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout
 # from PyQt5.QtGui import QColor, QPalette
 # from PyQt5.QtCore import QCoreApplication
