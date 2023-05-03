@@ -1,6 +1,6 @@
 
 # Import the necessary classes from PyQt6.QtWidgets
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QCheckBox, QPushButton, QMessageBox
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QCheckBox, QPushButton, QMessageBox
 
 
 # Create a class that inherits from QWidget
@@ -41,6 +41,8 @@ class MultipleChoiceQuestion(QWidget):
         # Set the layout in the window
         self.setLayout(qVBoxLayout)
 
+        self.correct_answer = correct_answer
+
     def check_answer(self):
         # Check if the selected answer is correct (QCheckBox.isChecked, QCheckBox.text)
         answers = []
@@ -51,7 +53,7 @@ class MultipleChoiceQuestion(QWidget):
         # Set the QMessageBox title to Correct!/Incorrect! (setWindowTitle)
         # Set the QMessageBox text to "Congratulations! Your answer is correct". (setText)
         # Run the event loop on the two message boxes
-        if answers == correct_answer:
+        if answers == self.correct_answer:
             print("Correct")
             qMessageBox = QMessageBox()
             qMessageBox.setWindowTitle("Correct!")
