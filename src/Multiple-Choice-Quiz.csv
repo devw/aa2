@@ -1,0 +1,6 @@
+question_type,question_text,choices,correct_answer,hint
+radio,"Who painted the ""Mona Lisa""?",Michelangelo; Leonardo da Vinci; Mirò,Leonardo da Vinci,He was born at Vinci which is a small town near Florence
+checkbox,Who are the two philosophers who are credited with laying the foundation for Western philosophy?,Socrates; Plato; Confucius; Kant,Socrates; Plato,They were ancient Greek philosophe
+text,What is the largest country in the world by area?,,Russia,The country's capital  is Moscow
+radio,Who developed the concept of complex numbers and laid the foundation for complex analysis?,Euler;Newton;Gauss;Hilbert,Gauss,He was a German mathematician and physicist
+checkbox,Which mathematicians are known for their work on calculus and are often credited with its development?,Euler;Newton;Gauss;Hilbert;Leibniz,Newton;Leibniz,"One discovered the laws of gravity, and the other wrote about the Monad."
